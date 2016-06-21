@@ -1,10 +1,26 @@
+# 修改了菜单的定义格式
 menu:
-    Blog: /
-    Archive: /archives/
-    Weibo: http://weibo.com/fengxianhe
-    GitHub: https://github.com/hefengxian
-    Coding: https://coding.net/u/hfx
-    Rss: /atom.xml
+  - name: Blog
+    path: /
+    icon: fa fa-home
+
+  - name: Archive
+    path: /archives/
+    icon: fa fa-folder-open-o
+
+  - name: Weibo
+    path: http://weibo.com/fengxianhe
+    icon: fa fa-weibo
+
+  - name: GitHub
+    path: https://github.com/hefengxian
+    icon: fa fa-github-alt
+
+  - name: Coding
+    path: https://coding.net/u/hfx
+    icon: iconfont coding
+
+#    Rss: /atom.xml
 
 favicon: /favicon.png
 logo: /favicon.png
