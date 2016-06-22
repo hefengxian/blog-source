@@ -20,6 +20,10 @@ menu:
     path: https://coding.net/u/hfx
     icon: iconfont coding
 
+  - name: About
+    path: /about/
+    icon: fa fa-info-circle
+
 #    Rss: /atom.xml
 
 favicon: /favicon.png
