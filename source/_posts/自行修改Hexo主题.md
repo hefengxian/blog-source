@@ -93,7 +93,7 @@ link(rel="stylesheet", href=url_for("css/apollo.css"))
 ```
 在这里我用的是[bootcdn](http://www.bootcdn.cn/)的CDN。
 
-再看一下，啊，大部分可以了，但是Font-Awesome这个项目并没有Coding的图标，但是我又很喜欢Coding，想把Coding方上去，那咋整呢？
+再看一下，啊，大部分可以了，但是Font-Awesome这个项目并没有Coding的图标，但是我又很喜欢Coding，想把Coding放上去，那咋整呢？
 
 以前记得淘宝好像有个字体图标的网站[ICONFONT](http://iconfont.cn/)，反正就是无意中发现的这么一个网站，往里面一搜coding，居然还真有人做了这个图标。
 
