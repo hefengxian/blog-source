@@ -1,6 +1,6 @@
 
 <p align="center">
-  ![Logo](http://7d9jd9.com1.z0.glb.clouddn.com/logo_sm.png)
+  <img src="http://7d9jd9.com1.z0.glb.clouddn.com/logo_sm.png" alt="logo">
 </p>
 
 # 博客源码
