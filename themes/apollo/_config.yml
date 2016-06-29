@@ -8,9 +8,9 @@ menu:
     path: /archives/
     icon: fa fa-folder-open-o
 
-  - name: Weibo
-    path: http://weibo.com/fengxianhe
-    icon: fa fa-weibo
+#  - name: Weibo
+#    path: http://weibo.com/fengxianhe
+#    icon: fa fa-weibo
 
   - name: GitHub
     path: https://github.com/hefengxian
@@ -23,6 +23,11 @@ menu:
   - name: About
     path: /about/
     icon: fa fa-info-circle
+
+  - name: Search
+    path: /tool/
+    icon: fa fa-search
+    target: _blank
 
 #    Rss: /atom.xml
 

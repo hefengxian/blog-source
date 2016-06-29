@@ -12,7 +12,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://hfx.coding.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -25,7 +25,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: tool/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -68,8 +68,8 @@ theme: apollo
 
 archive_generator:
   per_page: 0
-  yearly: false
-  monthly: false
+  yearly: true
+  monthly: true
   daily: false
 
 

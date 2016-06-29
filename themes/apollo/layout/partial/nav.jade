@@ -3,6 +3,7 @@ ul.nav.nav-list
         li.nav-list-item
             - var re = /^(http|https):\/\/*/gi;
             - var tar = re.test(value.path) ? "_blank" : "_self"
+            - if (value.target) tar = value.target
             a.nav-list-link(class={active: is_home() && value.path === "/"} href=value.path target=tar)
                 i(class=value.icon) &nbsp;
                 != value.name

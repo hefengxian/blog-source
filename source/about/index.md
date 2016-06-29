@@ -13,7 +13,7 @@ date: 2016-06-22 09:21:36
 
 ```php
 [
-    'name' => '何逢贤',
+    'name' => '何**',
     'company' => '深圳乐思技术软件有限公司',
     'sina_weibo' => 'http://weibo.com/fengxianhe'
 ]
