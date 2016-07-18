@@ -3,7 +3,7 @@
 
 # 博客源码
 
-基于Hexo Apollo主题
+基于Hexo <s>Apollo</s> NexT主题
 
 # 安装使用
 

@@ -8,12 +8,10 @@ tags:
 先去京东买个很便宜的240G的ADATA SSD。头天晚上下单，第二天早上上班就送到了。京东大城市的速度是毋庸置疑的。
 
 硬件安装方面换硬盘是相当简单的，我是直接将原来的硬盘取下来不用了；安装过程很简单，不赘诉。
-
 <!--more-->
 
 
-#### 系统安装
------
+### 系统安装
 
 * 准备一个4G U盘
 * 去官网下载Ubuntu 16.04
@@ -34,7 +32,6 @@ tags:
 安装完成之后，输入密码即可进入到系统了，SSD速度果然不俗！！！秒进！！！
 
 ### 基础的设置
------
 
 #### 更新软件源
 
@@ -52,7 +49,6 @@ tags:
 $ sudo add-apt-repository ppa:wiznote-team
 $ sudo apt-get update
 $ sudo apt-get install wiznote
-
 ```
 
 我开始安装还是遇到了问题，说是有个依赖找不到（因为那个时候我还没有切换源，切换之后再安装就正常了）
@@ -82,7 +78,6 @@ $ sudo apt-get install wiznote
 
 
 ### 开发环境的再次搭建
------
 
 #### 安装JDK
 
@@ -148,7 +143,10 @@ nvm install v5.12.0
 
 #### 安装Apache2.4
 
-
+依然使用apt安装，安装之后直接范围`http://localhost`应该就可以看到欢迎界面。
+```bash
+sudo apt install a
+```
 
 #### 安装PHP7
 
@@ -160,17 +158,14 @@ sudo apt-get install php php7.0-mysql php7.0-tidy php7.0-curl php7.0-mbstring
 
 
 #### 安装MySQL 和 MySQL Work Branch
-
-
+直接使用apt安装，安装MySQL途中要设置root密码，设置一个既可。
+```bash
+sudo apt-get install mysql-server mysql-workbench
+```
 
 #### 安装GIT
-
 直接时使用APT安装，安装完成之后直接配置全局信息。
-
 ```bash
-
 git config --global user.name hfx
-
 git config --global user.email jssmith883@gamil.com
-
 ```
