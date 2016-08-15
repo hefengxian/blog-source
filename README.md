@@ -11,6 +11,8 @@
 
 本地测试
 ```bash
+$ npm install --registry=https://registry.npm.taobao.org
+
 $ hexo server
 ```
 
