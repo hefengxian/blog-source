@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>搜索工具</title>
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <style>
+        .fa-google {
+            color: #4285f4;
+        }
+
+        .fa-paw {
+            color: #2319dc;
+        }
+        
+        .fa-google.muted, .fa-paw.muted {
+            color: #ccc;
+        }
+        
+        .fa-exchange{
+            color: #000;
+        }
+
+        .text-muted {
+            font-size: 12px;
+        }
+
+        .fa-thumbs-down {
+            color: #34495E;
+        }
+
+        .switch-engine {
+            text-decoration: none;
+        }
+
+        canvas{
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .list-group, .list-group-item{
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body id="app">
+<canvas></canvas>
+
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                <a href="http://hfx.coding.me/" target="_blank"><img src="/favicon.png" class="center-block"></a>
+                <form action="" method="GET" target="_blank" id="search-form">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <input type="text"
+                                   id="keyword"
+                                   class="form-control"
+                                   name=""
+                                   autofocus="autofocus"
+                                   autocomplete="off"
+                                   @keydown="keyPressHandler($event)"
+                                   @keydown.enter="preformSearch(defaultEngine)"
+                                   v-model="keyword">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"
+                                        type="button"
+                                        @click.prevent="preformSearch('google')">
+                                    <i class="fa fa-google"></i>
+                                </button>
+                                <button class="btn btn-default"
+                                        type="button"
+                                        @click.prevent="preformSearch('baidu')">
+                                    <i class="fa fa-paw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <a class="list-group-item"
+                           href="javascript:;"
+                           v-for="suggestion in suggestions"
+                           :class="{'active': $index == counter}"
+                           @click.prevent="suggestionClickHandler(suggestion.q)"
+                           v-text="suggestion.q">
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+
+<footer style="">
+    <p class="text-muted text-center">&copy; 2016-PRESENT <a href="http://hfx.coding.me/" target="_blank">HFX</a> &emsp;
+        <a class="switch-engine"
+           href="javascript:;"
+           title="切换默认搜索引擎"
+           @click="switchEngine(isBaidu ? 'google' : 'baidu')">
+            <i class="fa fa-google" :class="{'muted': !isGoogle}"></i>
+            <i class="fa fa-exchange"></i>
+            <i class="fa fa-paw" :class="{'muted': !isBaidu}"></i>
+        </a></p>
+    <p class="text-muted text-center">使用 <i title="百度" class="fa fa-paw"></i> 搜索建议，默认 <i title="Google" class="fa" :class="isGoogle ? 'fa-google' : 'fa-paw'"></i>
+        搜索，请自备梯子；GFW <i class="fa fa-thumbs-down"></i>
+    </p>
+</footer>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/vue/1.0.26/vue.min.js"></script>
+
+<script>
+    SUGGEST_ENGINE = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?json=1'
+    ENGINE_STORE_KEY = 'search_engine_store_key'
+    GOOGLE = {code: 'google', url: 'https://www.google.com/search', name: 'q'}
+    BAIDU = {code: 'baidu', url: 'http://www.baidu.com/s', name: 'wd'}
+
+    /* 从localStorage加载默认搜索引擎 */
+    function _loadEngine() {
+        var engine = localStorage.getItem(ENGINE_STORE_KEY)
+
+        switch (engine) {
+            case 'google':
+                return GOOGLE
+            case 'baidu':
+                return BAIDU
+            default:
+                return GOOGLE
+        }
+    }
+
+    /* 存储到localStorage */
+    function _storeEngine(engine) {
+        localStorage.setItem(ENGINE_STORE_KEY, engine)
+    }
+
+
+    /**
+     * Vue
+     */
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            engine: _loadEngine(),
+            defaultEngine: _loadEngine()['code'],
+            keyword: '',
+            counter: -1,
+            suggestions: []
+        },
+        ready: function () {
+            this.$watch('keyword', function (val) {
+                if ($.trim(val) != '') {
+                    this.suggest()
+                } else {
+                    this.suggestions = []
+                }
+            })
+        },
+        computed: {
+            isBaidu: function () {
+                return this.defaultEngine == 'baidu'
+            },
+            isGoogle: function () {
+                return this.defaultEngine == 'google'
+            }
+        },
+        methods: {
+            suggest: function () {
+                var data = {wd: this.keyword}
+                $.ajax({
+                    url: SUGGEST_ENGINE,
+                    data: data,
+                    type: 'get',
+                    dataType: 'jsonp'
+                })
+            },
+
+            keyPressHandler: function (e) {
+                switch (e.keyCode) {
+                    case 38:    // up
+                        e.preventDefault()
+                        this.counter--
+                        if (this.counter < 0)
+                            this.counter = this.suggestions.length - 1
+
+                        var val = this.suggestions[this.counter]['q']
+                        if (val != '') this.setKeyword(val)
+                        break
+                    case 40:    // down
+                        e.preventDefault()
+                        this.counter++
+                        if (this.counter >= this.suggestions.length)
+                            this.counter = 0
+
+                        var val = this.suggestions[this.counter]['q']
+                        if (val != '') this.setKeyword(val)
+                        break
+                }
+
+            },
+
+            submit: function () {
+                var form = $('#search-form'),
+                    keyword = $("#keyword")
+
+                console.log(this.engine)
+
+                form.attr('action', this.engine.url)
+                keyword.attr('name', this.engine.name)
+                form.submit()
+            },
+
+            setKeyword: function (val) {
+                $('#keyword').val(val)
+            },
+
+            suggestionClickHandler: function (val) {
+                this.setKeyword(val)
+                this.submit()
+            },
+
+            preformSearch: function (engine) {
+                switch (engine) {
+                    case 'google':
+                        this.engine = GOOGLE
+                        break
+                    case 'baidu':
+                        this.engine = BAIDU
+                        break
+                }
+                this.submit()
+            },
+
+            switchEngine: function (def) {
+                this.defaultEngine = def
+                _storeEngine(def)
+                this.engine = _loadEngine()
+            }
+        }
+    })
+
+    /* 百度搜索建议JSONP回调 */
+    window.baidu = {}
+    window.baidu.sug = function (params) {
+        vm.counter = -1
+        vm.suggestions = params.g
+    }
+</script>
+
+<script>
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault()
+    })
+    var c = document.getElementsByTagName('canvas')[0],
+            x = c.getContext('2d'),
+            pr = window.devicePixelRatio || 1,
+            w = window.innerWidth,
+            h = window.innerHeight,
+            f = 200,
+            q,
+            m = Math,
+            r = 0,
+            u = m.PI*2,
+            v = function(n) {
+                return m.sin(n)*m.sin(n)
+            },
+            z = m.random
+    c.width = w*pr
+    c.height = h*pr
+    x.scale(pr, pr)
+    x.globalAlpha = 0.6
+    function i(){
+        x.clearRect(0,0,w,h)
+        q=[{x:0,y:h*.7+f},{x:0,y:h*.7-f}]
+        while(q[1].x<w+f) d(q[0], q[1])
+    }
+    function d(i,j){
+        x.beginPath()
+        x.moveTo(i.x, i.y)
+        x.lineTo(j.x, j.y)
+        var k = j.x + (z()*2-0.25)*f,
+                n = y(j.y)
+        x.lineTo(k, n)
+        x.closePath()
+        r-=u/-50
+        x.fillStyle = '#'+(v(r)*127+128<<16 | v(r+u/3)*127+128<<8 | v(r+u/3*2)*127+128).toString(16)
+        x.fill()
+        q[0] = q[1]
+        q[1] = {x:k,y:n}
+    }
+    function y(p){
+        var t = p + (z()*2-1.1)*f
+        return (t>h||t<0) ? y(p) : t
+    }
+    document.onclick = i
+    document.ontouchstart = i
+    i()
+</script>
+</body>
+</html>
