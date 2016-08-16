@@ -33,6 +33,7 @@ menu:
   archives: /archives
   tags: /tags
   about: /about
+  tool: /tool
 #  commonweal: /404.html
 
 
@@ -50,6 +51,7 @@ menu_icons:
   tags: tags
   archives: archive
   commonweal: heartbeat
+  tool: search
 
 
 
