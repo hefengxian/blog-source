@@ -9,7 +9,7 @@ tags: article
 
 ## 代码高亮测试
 
-#### Javascript
+### Javascript
 ```js
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -47,7 +47,7 @@ export default{
 }
 ```
 
-#### LaTex
+### LaTex
 ```tex
 When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
 $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
@@ -55,7 +55,7 @@ $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
 $$\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$
 ```
 
-#### PHP
+### PHP
 ```php
 <?php
 
@@ -91,7 +91,7 @@ class Article extends BaseModel
 }
 ```
 
-#### HTML
+### HTML
 ```html
 <!DOCTYPE html>
 <html lang="en" class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie8 no-ie10 no-ie11 no-ios">
@@ -128,7 +128,7 @@ class Article extends BaseModel
 </html>
 ```
 
-#### Java
+### Java
 ```java
 package org.telegram.mtproto;
 
@@ -168,7 +168,7 @@ public class HelpGetNearestDc extends TLMethod<NearestDc> {
 ```
 
 
-#### SQL
+### SQL
 ```sql
 -- 1. 插入新的权限对象
 INSERT INTO OPERATION_OBJECT

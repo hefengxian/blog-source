@@ -1,6 +1,8 @@
 ---
 title: Ubuntu Apahce2.4无法访问javascript目录的问题
 date: 2016-08-16 14:29:46
+categories:
+- 日常笔记
 tags:
 - Ubuntu
 - Apache2.4
