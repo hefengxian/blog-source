@@ -29,10 +29,10 @@ canonical: true
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-#  categories: /categories
-  about: /about
-#  archives: /archives
+  categories: /categories
+  archives: /archives
   tags: /tags
+  about: /about
 #  commonweal: /404.html
 
 
@@ -230,8 +230,9 @@ auto_excerpt:
 
 # MathJax Support
 mathjax:
-  enable: false
-  cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  enable: true
+#  cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  cdn: //cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 
 # Swiftype Search API Key
@@ -241,7 +242,7 @@ mathjax:
 #baidu_analytics:
 
 # Duoshuo ShortName
-# duoshuo_shortname: hefengxian
+duoshuo_shortname: hefengxian
 
 # Disqus
 #disqus_shortname:
@@ -337,7 +338,7 @@ baidu_push: false
 #! ---------------------------------------------------------------
 
 # Motion
-use_motion: true
+use_motion: false
 
 # Fancybox
 fancybox: true
