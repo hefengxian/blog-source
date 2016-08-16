@@ -8,6 +8,10 @@
 # 安装使用
 
 安装Hexo，可以参照[Hexo](https://hexo.io/)官网的文档
+```bash
+$ git clone https://git.coding.net/hfx/hfx.git -b master
+```
+
 
 本地测试
 ```bash
