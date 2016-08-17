@@ -77,6 +77,9 @@ archive_generator:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+- type: git
   repo: https://git.coding.net/hfx/hfx.git
   branch: coding-pages
+- type: git
+  repo: https://github.com/hefengxian/hefengxian.github.io.git
+
