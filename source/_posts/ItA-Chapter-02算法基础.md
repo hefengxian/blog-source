@@ -1,5 +1,5 @@
 ---
-title: ItA-Chapter-02算法基础.md
+title: Chapter_02 算法基础
 date: 2016-08-19 22:00:01
 categories:
 - 《算法导论》笔记
