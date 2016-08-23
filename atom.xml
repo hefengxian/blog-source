@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hfx.coding.me/"/>
-  <updated>2016-08-19T03:10:27.547Z</updated>
+  <updated>2016-08-23T04:52:04.589Z</updated>
   <id>http://hfx.coding.me/</id>
   
   <author>
@@ -16,11 +16,131 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>《TCP/IP详解》第一章 概述</title>
+    <link href="http://hfx.coding.me/2016/08/22/TCP-IP%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
+    <id>http://hfx.coding.me/2016/08/22/TCP-IP详解第一章/</id>
+    <published>2016-08-22T09:58:15.000Z</published>
+    <updated>2016-08-23T04:52:04.589Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现<br>可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含超过100万台遍布世界的计算机。</p>
+<p>本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。</p>
+<a id="more"></a>
+<h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>网络协议通常分不同层次进行开发，每一层分别负责不同的通信功能。一个协议族，比如TCP/IP，是一组不同层次上的多个协议的组合。TCP/IP通常被任务是一个四层协议系统。</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>Telnet、FTP和e-mail等</td>
+</tr>
+<tr>
+<td>运输层</td>
+<td>TCP和UDP</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP、ICMP和IGMP</td>
+</tr>
+<tr>
+<td>链路层</td>
+<td>设备驱动程序以及接口卡</td>
+</tr>
+</tbody>
+</table>
+<p>每一层负责不同的功能：</p>
+<ol>
+<li><p><strong>链路层</strong>，有时也成为数据链路层或网络接口层，通常包括操作兄台哪个中的设备驱动程序和计算机中对应网络接口卡。它们一起处理与电缆（或其他任何的传输媒介）的物理接口细节。</p>
+</li>
+<li><p><strong>网络层</strong>，有时也称作互联网层，处理分组咋网络中的活动，例如分组的选路。在TCP/IP协议族中，网络层协议包括IP协议（网际协议），ICMP协议（Internet互联网控制报文协议），以及IGMP协议（Internet组管理协议）。</p>
+</li>
+<li><p><strong>运输层</strong>，主要为两台主机上的应用程序提供端到端的通信。在TCP/IP协议族中，有两个互不相同的传输协议：TCP（传输控制协议）和UDP（用户数据报协议）。<br>TCP为两台主机提供高可靠的数据通信。它所做的工作包括把应用程序交给它的数据分成合适的小块交给下面的网络层，确认接收到的分组，设置发送最后确认分组的超时时钟等。由于运输层提供了高可靠性的端到端通信，因此应用层可以忽略所有这些细节。<br>UDP则为应用层提供一种非常简单的服务。它只是把称作数据报的分组从一台主机发送到另一台主机，但并不保证该数据报能到达另一端。任何必需的可靠性必须由应用层来提供。</p>
+</li>
+<li><p><strong>应用层</strong>，负责处理特定的应用程序细节。几乎各种不同的TCP/IP实现都会提供下面这些通用的应用程序。</p>
+<ul>
+<li>Telnet 远程登录。</li>
+<li>FTP 文件传输协议。</li>
+<li>SMTP 简单右键传送协议。</li>
+<li>SNMP 简单网络管理协议。</li>
+</ul>
+</li>
+</ol>
+<p>构造互联网最简单的方法是把两个或者多个网络通过路由器进行连接。它是一种特殊的用于网络互联的硬件盒。路由器的好处是为不同的物理网络提供连接：以太网、令牌环网、点对点的连接和FDDI（光纤分布式数据接口）等等。</p>
+<h2 id="TCP-IP的分层"><a href="#TCP-IP的分层" class="headerlink" title="TCP/IP的分层"></a>TCP/IP的分层</h2><ol>
+<li><p>TCP</p>
+</li>
+<li><p>UDP</p>
+</li>
+<li><p>IP</p>
+</li>
+<li><p>ICMP</p>
+</li>
+<li><p>IGMP</p>
+</li>
+<li><p>ARP</p>
+</li>
+</ol>
+<h2 id="互联网的地址"><a href="#互联网的地址" class="headerlink" title="互联网的地址"></a>互联网的地址</h2><h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><h2 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h2><h2 id="客户-服务器模型"><a href="#客户-服务器模型" class="headerlink" title="客户-服务器模型"></a>客户-服务器模型</h2><h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><h2 id="标准化过程"><a href="#标准化过程" class="headerlink" title="标准化过程"></a>标准化过程</h2><h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><h2 id="标准的简单服务"><a href="#标准的简单服务" class="headerlink" title="标准的简单服务"></a>标准的简单服务</h2><h2 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="应用编程接口"><a href="#应用编程接口" class="headerlink" title="应用编程接口"></a>应用编程接口</h2><h2 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现&lt;br&gt;可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含超过100万台遍布世界的计算机。&lt;/p&gt;
+&lt;p&gt;本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="《TCP/IP详解》笔记" scheme="http://hfx.coding.me/categories/%E3%80%8ATCP-IP%E8%AF%A6%E8%A7%A3%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://hfx.coding.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="TCP/IP详解" scheme="http://hfx.coding.me/tags/TCP-IP%E8%AF%A6%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter_02 算法基础</title>
+    <link href="http://hfx.coding.me/2016/08/19/ItA-Chapter-02%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/"/>
+    <id>http://hfx.coding.me/2016/08/19/ItA-Chapter-02算法基础/</id>
+    <published>2016-08-19T14:00:01.000Z</published>
+    <updated>2016-08-22T09:56:40.961Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。<br><a id="more"></a></p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>我们的第一个算法（插入排序）求解第1章中引入的<strong>排序问题</strong>：</p>
+<ul>
+<li><strong>输入</strong>：$n$ 个数的一个序列 $\langle a_1, a_2, \dotsm, a_n \rangle$ 。</li>
+<li><strong>输出</strong>：输入序列的一个排列 $\langle a’_{1}, a’_{2}, \dotsm, a’_{n} \rangle$ ，满足 $a’_{1} \leq a’_{2} \leq \dotsm \leq a’_{n}$</li>
+</ul>
+<p>我们希望排序的数也称为<strong>关键词</strong>。虽然概念上我们在排序一个序列，但是输入是以 $n$ 个元素的数组的形式出现的。</p>
+<p>我们通常将算法描述为用一种<strong>伪代码</strong>书写的程序，该伪代码在许多方面类似于C、C++、Java、Python或Pascal。伪代码和真代码的区别在于，伪代码使用最清晰、最简介的表示方法来说明给定的算法。</p>
+<p>未完待续…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="《算法导论》笔记" scheme="http://hfx.coding.me/categories/%E3%80%8A%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法导论" scheme="http://hfx.coding.me/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="读书笔记" scheme="http://hfx.coding.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Chapter_01 算法在计算中的作用</title>
     <link href="http://hfx.coding.me/2016/08/17/ItA-Chapter-01%E7%AE%97%E6%B3%95%E5%9C%A8%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
     <id>http://hfx.coding.me/2016/08/17/ItA-Chapter-01算法在计算中的作用/</id>
     <published>2016-08-17T14:52:45.000Z</published>
-    <updated>2016-08-19T03:10:27.547Z</updated>
+    <updated>2016-08-22T09:56:40.961Z</updated>
     
     <content type="html"><![CDATA[<p>什么是是算法？为什么算法值得研究？相对于计算机中使用的其他技术来说算法的作用是什么？</p>
 <a id="more"></a>
@@ -31,6 +151,8 @@
 <li><strong>输入</strong>：$n$ 个数的一个序列 $\langle a_1, a_2, \dotsm, a_n \rangle$ 。</li>
 <li><strong>输出</strong>：输入序列的一个排列 $\langle a’_{1}, a’_{2}, \dotsm, a’_{n} \rangle$ ，满足 $a’_{1} \leq a’_{2} \leq \dotsm \leq a’_{n}$</li>
 </ul>
+<p>例如，给定输入序列 $\langle 31, 41, 59, 26, 41, 58 \rangle$ ，排序算法将返回序列 $\langle 26, 31, 41,  41, 58, 59 \rangle$ 作为输出。这样的输入序列称为排序问题的一个<strong>实例(instance)</strong>。一般来说，<strong>问题实例</strong>由计算该问题所必需的（满足问题陈述中强加的各种约束的）的输入组成。</p>
+<p>若对每个输入实例，算法都以正确的输出停机，则称该算法是<strong>正确的</strong>，并称正确的算法<strong>解决了</strong>给定的计算问题。不正确的算法对某些输入可能根本不停机，也可能以不正确的回答停机。</p>
 ]]></content>
     
     <summary type="html">

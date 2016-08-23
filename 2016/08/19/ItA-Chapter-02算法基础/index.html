@@ -59,7 +59,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法导论,读书笔记," />
 
 
 
@@ -77,15 +77,16 @@
 
 
 
-<meta name="description" content="没事多写写">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HFX的BLOG">
-<meta property="og:url" content="http://hfx.coding.me/tags/SSD/index.html">
+<meta name="description" content="本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter_02 算法基础">
+<meta property="og:url" content="http://hfx.coding.me/2016/08/19/ItA-Chapter-02算法基础/index.html">
 <meta property="og:site_name" content="HFX的BLOG">
-<meta property="og:description" content="没事多写写">
+<meta property="og:description" content="本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。">
+<meta property="og:updated_time" content="2016-08-22T09:56:40.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HFX的BLOG">
-<meta name="twitter:description" content="没事多写写">
+<meta name="twitter:title" content="Chapter_02 算法基础">
+<meta name="twitter:description" content="本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。">
 
 
 
@@ -106,9 +107,9 @@
 
 
 
-  <link rel="canonical" href="http://hfx.coding.me/tags/SSD/"/>
+  <link rel="canonical" href="http://hfx.coding.me/2016/08/19/ItA-Chapter-02算法基础/"/>
 
-  <title> 标签: SSD | HFX的BLOG </title>
+  <title> Chapter_02 算法基础 | HFX的BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -129,7 +130,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,46 +238,162 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        SSD
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Chapter_02 算法基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-19T22:00:01+08:00" content="2016-08-19">
+              2016-08-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/《算法导论》笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">《算法导论》笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/19/ItA-Chapter-02算法基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/ItA-Chapter-02算法基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。<br><a id="more"></a></p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>我们的第一个算法（插入排序）求解第1章中引入的<strong>排序问题</strong>：</p>
+<ul>
+<li><strong>输入</strong>：$n$ 个数的一个序列 $\langle a_1, a_2, \dotsm, a_n \rangle$ 。</li>
+<li><strong>输出</strong>：输入序列的一个排列 $\langle a’_{1}, a’_{2}, \dotsm, a’_{n} \rangle$ ，满足 $a’_{1} \leq a’_{2} \leq \dotsm \leq a’_{n}$</li>
+</ul>
+<p>我们希望排序的数也称为<strong>关键词</strong>。虽然概念上我们在排序一个序列，但是输入是以 $n$ 个元素的数组的形式出现的。</p>
+<p>我们通常将算法描述为用一种<strong>伪代码</strong>书写的程序，该伪代码在许多方面类似于C、C++、Java、Python或Pascal。伪代码和真代码的区别在于，伪代码使用最清晰、最简介的表示方法来说明给定的算法。</p>
+<p>未完待续…</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/07/07/公司电脑升级SSD记/" itemprop="url">
-              
-                <span itemprop="name">电脑升级SSD记</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-07T23:19:34+08:00"
-              content="2016-07-07" >
-          07-07
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法导论/" rel="tag">#算法导论</a>
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/17/ItA-Chapter-01算法在计算中的作用/" rel="next" title="Chapter_01 算法在计算中的作用">
+                <i class="fa fa-chevron-left"></i> Chapter_01 算法在计算中的作用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/22/TCP-IP详解第一章/" rel="prev" title="《TCP/IP详解》第一章 概述">
+                《TCP/IP详解》第一章 概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -284,6 +401,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/19/ItA-Chapter-02算法基础/"
+           data-title="Chapter_02 算法基础" data-url="http://hfx.coding.me/2016/08/19/ItA-Chapter-02算法基础/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -303,8 +428,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
@@ -361,6 +495,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">1.</span> <span class="nav-text">插入排序</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -455,6 +600,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
