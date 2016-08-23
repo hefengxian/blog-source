@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hfxblog.com/"/>
-  <updated>2016-08-23T04:52:04.589Z</updated>
+  <updated>2016-08-23T13:54:55.356Z</updated>
   <id>http://www.hfxblog.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.hfxblog.com/2016/08/22/TCP-IP%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
     <id>http://www.hfxblog.com/2016/08/22/TCP-IP详解第一章/</id>
     <published>2016-08-22T09:58:15.000Z</published>
-    <updated>2016-08-23T04:52:04.589Z</updated>
+    <updated>2016-08-23T13:54:55.356Z</updated>
     
     <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现<br>可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含超过100万台遍布世界的计算机。</p>
 <p>本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。</p>
@@ -70,21 +70,96 @@
 </li>
 </ol>
 <p>构造互联网最简单的方法是把两个或者多个网络通过路由器进行连接。它是一种特殊的用于网络互联的硬件盒。路由器的好处是为不同的物理网络提供连接：以太网、令牌环网、点对点的连接和FDDI（光纤分布式数据接口）等等。</p>
-<h2 id="TCP-IP的分层"><a href="#TCP-IP的分层" class="headerlink" title="TCP/IP的分层"></a>TCP/IP的分层</h2><ol>
-<li><p>TCP</p>
-</li>
-<li><p>UDP</p>
-</li>
-<li><p>IP</p>
-</li>
-<li><p>ICMP</p>
-</li>
-<li><p>IGMP</p>
-</li>
-<li><p>ARP</p>
-</li>
-</ol>
-<h2 id="互联网的地址"><a href="#互联网的地址" class="headerlink" title="互联网的地址"></a>互联网的地址</h2><h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><h2 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h2><h2 id="客户-服务器模型"><a href="#客户-服务器模型" class="headerlink" title="客户-服务器模型"></a>客户-服务器模型</h2><h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><h2 id="标准化过程"><a href="#标准化过程" class="headerlink" title="标准化过程"></a>标准化过程</h2><h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><h2 id="标准的简单服务"><a href="#标准的简单服务" class="headerlink" title="标准的简单服务"></a>标准的简单服务</h2><h2 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="应用编程接口"><a href="#应用编程接口" class="headerlink" title="应用编程接口"></a>应用编程接口</h2><h2 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2>]]></content>
+<h2 id="TCP-IP的分层"><a href="#TCP-IP的分层" class="headerlink" title="TCP/IP的分层"></a>TCP/IP的分层</h2><p>TCP和UDP是两种最为著名的运输层协议，二者豆使用IP作为网络层协议。</p>
+<ul>
+<li><strong>TCP</strong>，虽然TCP使用不可靠的IP服务，但它阙提供一种可靠的运输层服务。</li>
+<li><strong>UDP</strong>，为应用程序发送和接收数据报。一个数据是指从发送方传输到接收方的一个信息单元。但是与TCP不同的是，UDP是不可靠的，它不能保证数据报能安全无误的到达最终目的地。</li>
+<li><strong>IP</strong>，是网络层上主要协议，同时被TCP和UDP使用。TCP和UDP的魅族数据都通过端系统和每个中间路由器中的IP层在互联网中进行传输。</li>
+<li><strong>ICMP</strong>，是IP协议的附属协议，IP层用它来与其他主机或路由器交换错误报文和其他重要信息。</li>
+<li><strong>IGMP</strong>，是Internet组管理协议。它用来把一个UDP数据报多到多个主机。</li>
+<li><strong>ARP</strong>，地址解析协议和RARP（逆地址解析协议）是某些网络接口（如以太网和令牌环网）使用的特殊协议，用来转换IP层和网络接口层使用的地址。</li>
+</ul>
+<h2 id="互联网的地址"><a href="#互联网的地址" class="headerlink" title="互联网的地址"></a>互联网的地址</h2><p>互联网上的每个接口必有有个唯一的Internet地址（也称作IP地址）。IP地址长32bit。Internet地址并不采用平面形式的地址空间，如1、2、3等。IP地址是具有一定结构的，五类不同的互联网地址格式如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:left">固定位（二进制）</th>
+<th style="text-align:left">网络号长度</th>
+<th style="text-align:left">主机号长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A类</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">7 bit</td>
+<td style="text-align:left">24 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">B类</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left">14 bit</td>
+<td style="text-align:left">16 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">C类</td>
+<td style="text-align:left">110</td>
+<td style="text-align:left">21 bit</td>
+<td style="text-align:left">8 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">D类</td>
+<td style="text-align:left">1110</td>
+<td style="text-align:left">28 bit（多播组号）</td>
+</tr>
+<tr>
+<td style="text-align:center">E类</td>
+<td style="text-align:left">11110</td>
+<td style="text-align:left">27 bit（留待后用）</td>
+</tr>
+</tbody>
+</table>
+<p>这些32位的地址通写成4个十进制的数，其中每个整数对应一个字节。这种表示方法称作“点分十进制表示法（Dotted decimal notation）”。<br>区分各类地址的最简单方法就是看它的第一个十进制整数。如下表，其中第一个十进制整数用粗体表示。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:right">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类</td>
+<td style="text-align:right"><strong>0</strong>.0.0.0 - <strong>127</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>B类</td>
+<td style="text-align:right"><strong>128</strong>.0.0.0 - <strong>191</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>C类</td>
+<td style="text-align:right"><strong>192</strong>.0.0.0 - <strong>223</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>D类</td>
+<td style="text-align:right"><strong>224</strong>.0.0.0 - <strong>239</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>E类</td>
+<td style="text-align:right"><strong>240</strong>.0.0.0 - <strong>255</strong>.255.255.255</td>
+</tr>
+</tbody>
+</table>
+<p>需要指出的是，多接口主机具有多个IP地址，其中每个接口对对应一个IP地址（比如笔记本电脑的WIFI和网线有不同的IP）。</p>
+<p>由于互联网上的每个接口都必须有一个唯一的IP地址，因此必须要有一个管理机构为接入互联网的网络分配IP地址。这个管理机构就是互联网信息中心（Internet Network Information Center），称作InterNIC。InterNIC只分配网络号。主机号的分配由系统管理员来负责。</p>
+<p>有三类IP地址：</p>
+<ul>
+<li>单播地址，目的端为单个主机。</li>
+<li>广播地址，目的端为给定网路上的所有主机。</li>
+<li>多播地址，目的端为同一个组内的所有主机。</li>
+</ul>
+<h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><h2 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h2><h2 id="客户-服务器模型"><a href="#客户-服务器模型" class="headerlink" title="客户-服务器模型"></a>客户-服务器模型</h2><h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><h2 id="标准化过程"><a href="#标准化过程" class="headerlink" title="标准化过程"></a>标准化过程</h2><h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><h2 id="标准的简单服务"><a href="#标准的简单服务" class="headerlink" title="标准的简单服务"></a>标准的简单服务</h2><h2 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="应用编程接口"><a href="#应用编程接口" class="headerlink" title="应用编程接口"></a>应用编程接口</h2><h2 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2>]]></content>
     
     <summary type="html">
     
