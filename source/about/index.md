@@ -18,7 +18,10 @@ date: 2016-06-22 09:21:36
 * 会用`Java/PHP`的码农一枚
 * 从事WEB开发，爱好前端
 
-+ 博客GitHub地址： [http://hefengxian.github.io/](http://hefengxian.github.io/)
-+ 博客Coding地址： [http://hfx.coding.me/](http://hfx.coding.me/)
+GitHub: [https://github.com/hefengxian](https://github.com/hefengxian)
+Coding: [https://coding.net/u/hfx](https://coding.net/u/hfx)
 
-- 博客源码：[https://git.coding.net/hfx/hfx.git](https://git.coding.net/hfx/hfx.git) Master 分支
+- 博客源码：[https://git.coding.net/hfx/hfx.git](https://git.coding.net/hfx/hfx.git) 切换成 Master 分支
+
+
+&copy; [http://hfxblog.com/](http://hfxblog.com/)
