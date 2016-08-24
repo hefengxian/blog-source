@@ -1,5 +1,5 @@
 ---
-title: Chapter_01 算法在计算中的作用
+title: 第一章 算法在计算中的作用
 categories:
 - 《算法导论》笔记
 tags:
