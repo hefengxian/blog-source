@@ -79,13 +79,13 @@
 
 <meta name="description" content="本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Chapter_02 算法基础">
+<meta property="og:title" content="第二章 算法基础">
 <meta property="og:url" content="http://www.hfxblog.com/2016/08/19/ItA-Chapter-02算法基础/index.html">
 <meta property="og:site_name" content="HFX的BLOG">
 <meta property="og:description" content="本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。">
-<meta property="og:updated_time" content="2016-08-22T09:56:40.961Z">
+<meta property="og:updated_time" content="2016-08-24T08:20:41.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter_02 算法基础">
+<meta name="twitter:title" content="第二章 算法基础">
 <meta name="twitter:description" content="本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。">
 
 
@@ -109,7 +109,7 @@
 
   <link rel="canonical" href="http://www.hfxblog.com/2016/08/19/ItA-Chapter-02算法基础/"/>
 
-  <title> Chapter_02 算法基础 | HFX的BLOG </title>
+  <title> 第二章 算法基础 | HFX的BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -259,7 +259,7 @@
             
             
               
-                Chapter_02 算法基础
+                第二章 算法基础
               
             
           </h1>
@@ -333,7 +333,8 @@
 </ul>
 <p>我们希望排序的数也称为<strong>关键词</strong>。虽然概念上我们在排序一个序列，但是输入是以 $n$ 个元素的数组的形式出现的。</p>
 <p>我们通常将算法描述为用一种<strong>伪代码</strong>书写的程序，该伪代码在许多方面类似于C、C++、Java、Python或Pascal。伪代码和真代码的区别在于，伪代码使用最清晰、最简介的表示方法来说明给定的算法。</p>
-<p>未完待续…</p>
+<p>插入排序，对于少量的元素排序，它是一个有效的算法。插入排序的工作方式像大家排序扑克牌一样。开始时，我们的左手为空并且桌面的牌面朝下。然后，我们每次从桌上拿一张牌，插入左手上正确的位置。为了找到一张牌的正确位置，我们从左到右将它与已经在手中的牌进行比较。这样拿在左手上的牌总是排序好的，原来这些牌都是桌子上牌堆中顶部的牌。</p>
+<p>对于插入排序，我们将其伪代码过程命名为<code>INSERTION-SORT</code>，其中参数是一个数组 $A[1 \dotsm n]$，包含长度为 $n$ 的要排序的一个序列。（在代码中，$A$ 中元素的数目 $n$ 用 $A.length$ 表示）该算法<strong>原址</strong>排序输入的数：算法在数组 $A$ 中重排这些数，在任何时候，最多只有其中的常数个数字存储在数组外。在过程<code>INSERTION-SORT</code>结束时，输入数组 $A$ 包含排序好的输出序列。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">INSERTION-SORT</span><span class="params">(A)</span></span></div><div class="line">    <span class="keyword">for</span> j = <span class="number">2</span> to A<span class="selector-class">.length</span></div><div class="line">        key = A[j]</div><div class="line">        <span class="comment">// Insert A[j] into the sorted sequence A[1...j - 1]</span></div><div class="line">        <span class="selector-tag">i</span> = j - <span class="number">1</span></div><div class="line">        while <span class="selector-tag">i</span> &gt; <span class="number">0</span> and A[i] &gt; key</div><div class="line">            A[<span class="selector-tag">i</span> + <span class="number">1</span>] = A[i]</div><div class="line">            <span class="selector-tag">i</span> = <span class="selector-tag">i</span> - <span class="number">1</span></div><div class="line">        A[<span class="selector-tag">i</span> + <span class="number">1</span>] = key</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -367,8 +368,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/17/ItA-Chapter-01算法在计算中的作用/" rel="next" title="Chapter_01 算法在计算中的作用">
-                <i class="fa fa-chevron-left"></i> Chapter_01 算法在计算中的作用
+              <a href="/2016/08/17/ItA-Chapter-01算法在计算中的作用/" rel="next" title="第一章 算法在计算中的作用">
+                <i class="fa fa-chevron-left"></i> 第一章 算法在计算中的作用
               </a>
             
           </div>
@@ -404,7 +405,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/19/ItA-Chapter-02算法基础/"
-           data-title="Chapter_02 算法基础" data-url="http://www.hfxblog.com/2016/08/19/ItA-Chapter-02算法基础/">
+           data-title="第二章 算法基础" data-url="http://www.hfxblog.com/2016/08/19/ItA-Chapter-02算法基础/">
       </div>
     
   </div>
