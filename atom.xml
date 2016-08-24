@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hfxblog.com/"/>
-  <updated>2016-08-24T08:16:30.294Z</updated>
+  <updated>2016-08-24T08:24:44.234Z</updated>
   <id>http://www.hfxblog.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://www.hfxblog.com/2016/08/22/TCP-IP%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
     <id>http://www.hfxblog.com/2016/08/22/TCP-IP详解第一章/</id>
     <published>2016-08-22T09:58:15.000Z</published>
-    <updated>2016-08-24T08:16:30.294Z</updated>
+    <updated>2016-08-24T08:24:44.234Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现<br>可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含超过100万台遍布世界的计算机。</p>
+    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现<br>可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。</p>
 <p>本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。</p>
 <a id="more"></a>
 <h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>网络协议通常分不同层次进行开发，每一层分别负责不同的通信功能。一个协议族，比如TCP/IP，是一组不同层次上的多个协议的组合。TCP/IP通常被任务是一个四层协议系统。</p>
@@ -175,7 +175,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现&lt;br&gt;可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含超过100万台遍布世界的计算机。&lt;/p&gt;
+      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现&lt;br&gt;可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。&lt;/p&gt;
 &lt;p&gt;本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。&lt;/p&gt;
     
     </summary>
