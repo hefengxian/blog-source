@@ -1,0 +1,708 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ubuntu,PHP7,OCI," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HFX的BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="由于换了硬盘重装了（升级）系统到Ubuntu16.04之后，开发环境也要重新安装，其实16.04源里面默认的PHP版本就是7.x，但是有个问题就是没有OCI扩展，有项目需要使用到Oracle数据库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 16.04安装PHP7">
+<meta property="og:url" content="http://www.hfxblog.com/2016/07/16/16-04安装PHP7/index.html">
+<meta property="og:site_name" content="HFX的BLOG">
+<meta property="og:description" content="由于换了硬盘重装了（升级）系统到Ubuntu16.04之后，开发环境也要重新安装，其实16.04源里面默认的PHP版本就是7.x，但是有个问题就是没有OCI扩展，有项目需要使用到Oracle数据库。">
+<meta property="og:updated_time" content="2016-08-19T02:32:48.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 16.04安装PHP7">
+<meta name="twitter:description" content="由于换了硬盘重装了（升级）系统到Ubuntu16.04之后，开发环境也要重新安装，其实16.04源里面默认的PHP版本就是7.x，但是有个问题就是没有OCI扩展，有项目需要使用到Oracle数据库。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.hfxblog.com/2016/07/16/16-04安装PHP7/"/>
+
+  <title> Ubuntu 16.04安装PHP7 | HFX的BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HFX的BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">精力分配决定层次</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tool">
+          <a href="/tool" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            小工具
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ubuntu 16.04安装PHP7
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T16:23:55+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日常笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">日常笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/16/16-04安装PHP7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/16-04安装PHP7/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于换了硬盘重装了（升级）系统到Ubuntu16.04之后，开发环境也要重新安装，其实16.04源里面默认的PHP版本就是7.x，但是有个问题就是没有OCI扩展，有项目需要使用到Oracle数据库。<br><a id="more"></a></p>
+<h3 id="准备编译环境"><a href="#准备编译环境" class="headerlink" title="准备编译环境"></a>准备编译环境</h3><p>由于全部编译太过于繁琐，而且很多依赖会有问题，所以我们选择另外一种方案，能使用<code>apt-get</code>安装都使用<code>apt-get</code>安装。不能使用apt-get才自己编译，这样可以节省大量的时间。因为有的依赖真的是很头疼。</p>
+<p>由于在Ubuntu16.04上，默认的PHP版本就是7.x。由于我们要使用Apache2.4+PHP，所以安装如下模块即可直接解析PHP。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install php-dev libapache2-mod-php</div></pre></td></tr></table></figure></p>
+<p>这样最基本的模块就安装好了，如果还需要其他的模块，可以通过<code>apt-get</code>快捷安装；比如还需要MySQL和mb_string相关的模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install php-mysql php-mbstring</div></pre></td></tr></table></figure></p>
+<p>这样就会自动安装好相关的模块。</p>
+<h3 id="安装Oracle-Client"><a href="#安装Oracle-Client" class="headerlink" title="安装Oracle Client"></a>安装Oracle Client</h3><p>由于要编译OCI扩展，我们需要Oracle客户端，这里我们下载<a href="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html" target="_blank" rel="external">Oracle Instant Client</a>，选择Instant Client for Linux x86-64 basic版本下载。</p>
+<p>另外要编译OCI必须还需要instant client SDK 包，下载解压之后合并到Base。</p>
+<p>给出的网页最后面也有安装步骤，这里简述一下</p>
+<ol>
+<li>解压zip包，放置到某个目录下</li>
+<li>为当前版本的Instant Client创建合适的链接</li>
+<li>设置环境变量</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo unzip instantclient-basic-linux.x64-12.1.0.2.0.zip</div><div class="line">sudo unzip instantclient-sdk-linux.x64-12.1.0.2.0.zip</div><div class="line">sudo mv instantclient_12_1/ /opt/oracle/</div><div class="line"><span class="built_in">cd</span> /opt/oracle/instantclient_12_1/</div><div class="line"></div><div class="line"><span class="comment"># 建立符号链接</span></div><div class="line">sudo ln <span class="_">-s</span> libclntsh.so.12.1 libclntsh.so</div><div class="line">sudo ln <span class="_">-s</span> libocci.so.12.1 libocci.so</div><div class="line"></div><div class="line"><span class="comment"># 打开 /etc/profile 在最后面加入</span></div><div class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1:<span class="variable">$LD_LIBRARY_PATH</span></div><div class="line"><span class="built_in">export</span> PATH=/opt/oracle/instantclient_12_1:<span class="variable">$PATH</span></div><div class="line"></div><div class="line"><span class="comment"># 最后source一下，使配置生效</span></div><div class="line"><span class="built_in">source</span> /etc/profile</div></pre></td></tr></table></figure>
+<h3 id="下载PHP源码"><a href="#下载PHP源码" class="headerlink" title="下载PHP源码"></a>下载PHP源码</h3><p>首先我们要确定已经安装的PHP的版本，由于使用<code>apt-get</code>安装，版本可能不是PHP官网放的最新的版本，使用下面的 命令既可查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -v</div></pre></td></tr></table></figure></p>
+<p>发现我的安装的版本是<code>7.0.4</code>，那么我们对应的下载PHP-7.0.4版本的源码。<br>两种方式可以下载到源码。</p>
+<ul>
+<li>从官网下载源码包</li>
+<li>从GitHub 仓库 <code>clone</code></li>
+</ul>
+<p>官网下载源码很简单，打开<a href="http://php.net/downloads.php" target="_blank" rel="external">php.net</a>的Download页面，选择要下载的版本。或者从GitHub仓库<code>clone</code>指定版本（或者先<code>clone</code>再<code>checkout</code>想要的版本），如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> -b PHP-7.0.4 https://github.com/php/php-src &amp;&amp; <span class="built_in">cd</span> php-src</div></pre></td></tr></table></figure>
+<h3 id="编译OCI8-PDO-OCI"><a href="#编译OCI8-PDO-OCI" class="headerlink" title="编译OCI8/PDO_OCI"></a>编译OCI8/PDO_OCI</h3><p>经过如上的步骤我们已经进入到下载的PHP源码根目录了，那么我们开始编译。</p>
+<h4 id="编译oci8"><a href="#编译oci8" class="headerlink" title="编译oci8"></a>编译oci8</h4><p>进入到扩展oci8的源码目录，使用phpize</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ext/oci8</div><div class="line">phpize</div><div class="line">./configure --with-oci8=instantclient,/opt/oracle/instantclient_12_1</div><div class="line">sudo make</div></pre></td></tr></table></figure>
+<p>执行完上面的步骤，应该会生成一个<code>modules</code>文件夹，里面就有我们想要的extension。</p>
+<h4 id="编译pdo-oci"><a href="#编译pdo-oci" class="headerlink" title="编译pdo_oci"></a>编译pdo_oci</h4><p>步骤和编译oci8是一样的，但是configure参数不一样，所以还是写一下。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ../../ext/pdo_oci</div><div class="line">phpize</div><div class="line"><span class="comment"># 最后面要指定版本号</span></div><div class="line">./configure --with-pdo-oci=instantclient,/opt/oracle/instantclient_12_1,12.1</div><div class="line">sudo make</div></pre></td></tr></table></figure></p>
+<p>结果也和上面一样。</p>
+<h4 id="使用我们编译的扩展"><a href="#使用我们编译的扩展" class="headerlink" title="使用我们编译的扩展"></a>使用我们编译的扩展</h4><p>首先我们要知道现行PHP的ext目录在哪里<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -i | grep <span class="string">"extension_dir"</span></div></pre></td></tr></table></figure></p>
+<p>我这里显示的是<code>extension_dir =&gt; /usr/lib/php/20151012 =&gt; /usr/lib/php/20151012</code>，那么我们先把我们编译的扩展复制到<code>/usr/lib/php/20151012</code>下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先进入对应的modules目录下</span></div><div class="line">cp oci8.so /usr/lib/php/20151012</div><div class="line">cp pdo_oci.so /usr/lib/php/20151012</div></pre></td></tr></table></figure></p>
+<p>然后我们还要在<code>php.ini</code>中添加相关配置项，首先也要知道php.ini的位置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p -i | grep <span class="string">"Configuration File"</span></div></pre></td></tr></table></figure></p>
+<p>打印出了如下信息</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Configuration <span class="keyword">File</span> (php.ini) Path =&gt; <span class="regexp">/etc/</span>php<span class="regexp">/7.0/</span>cli</div><div class="line">Loaded Configuration <span class="keyword">File</span> =&gt; <span class="regexp">/etc/</span>php<span class="regexp">/7.0/</span>cli<span class="regexp">/php.ini</span></div></pre></td></tr></table></figure>
+<p>这样我们就知道了php.ini的位置，但是这个是CLI（命令行接口）的配置文件，我们需要使用Apache的（CGI）。我们到目录<code>/etc/php/7.0/</code>下发现还有一个名为<code>apache2</code>的目录，里面也有php.ini文件，那么我们编辑<code>apache2</code>目录下的php.ini</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">vim</span> <span class="selector-tag">php</span><span class="selector-class">.ini</span></div></pre></td></tr></table></figure>
+<p>在里面加入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">extension=oci8.so</div><div class="line">extension=pdo_oci.so</div></pre></td></tr></table></figure>
+<p>最后重启Apache<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl restart apache2.service</div></pre></td></tr></table></figure></p>
+<p>查看一下<code>phpinfo()</code>发现OCI和PDO_OCI均已安装。到这里安装已经全部完成了。</p>
+<h3 id="Linux小技巧"><a href="#Linux小技巧" class="headerlink" title="Linux小技巧"></a>Linux小技巧</h3><p>在安装和查资料的过程中发现了一下很实用的命令，也把它们记录下来。<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 重启某个服务</span></div><div class="line">sudo systemctl restart apache2.service</div><div class="line"></div><div class="line"><span class="meta"># 查看某个服务的状态</span></div><div class="line">sudo systemctl status apache2.service</div><div class="line"></div><div class="line"><span class="meta"># 查看php相关的模块（其他的类似）</span></div><div class="line">apt-cache search php- | less</div><div class="line"></div><div class="line"><span class="meta"># 具体查看某个模块的详细信息</span></div><div class="line">apt-cache show package_name</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ubuntu/" rel="tag">#Ubuntu</a>
+          
+            <a href="/tags/PHP7/" rel="tag">#PHP7</a>
+          
+            <a href="/tags/OCI/" rel="tag">#OCI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/07/公司电脑升级SSD记/" rel="next" title="电脑升级SSD记">
+                <i class="fa fa-chevron-left"></i> 电脑升级SSD记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/16/Ubuntu-Apahce2-4无法访问javascript目录的问题/" rel="prev" title="Ubuntu Apahce2.4无法访问javascript目录的问题">
+                Ubuntu Apahce2.4无法访问javascript目录的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/16/16-04安装PHP7/"
+           data-title="Ubuntu 16.04安装PHP7" data-url="http://www.hfxblog.com/2016/07/16/16-04安装PHP7/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="HFX" />
+          <p class="site-author-name" itemprop="name">HFX</p>
+          <p class="site-description motion-element" itemprop="description">没事多写写</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备编译环境"><span class="nav-number">1.</span> <span class="nav-text">准备编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Oracle-Client"><span class="nav-number">2.</span> <span class="nav-text">安装Oracle Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载PHP源码"><span class="nav-number">3.</span> <span class="nav-text">下载PHP源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译OCI8-PDO-OCI"><span class="nav-number">4.</span> <span class="nav-text">编译OCI8/PDO_OCI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编译oci8"><span class="nav-number">4.1.</span> <span class="nav-text">编译oci8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译pdo-oci"><span class="nav-number">4.2.</span> <span class="nav-text">编译pdo_oci</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用我们编译的扩展"><span class="nav-number">4.3.</span> <span class="nav-text">使用我们编译的扩展</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux小技巧"><span class="nav-number">5.</span> <span class="nav-text">Linux小技巧</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HFX</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hefengxian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+         processEscapes: true,
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+       }
+     });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

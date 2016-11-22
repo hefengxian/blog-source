@@ -1,0 +1,702 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="折腾,Hexo,Theme," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HFX的BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="折腾一下导航栏，相信很多用Hexo搭建博客的小伙伴们都使用了Apollo主题，这个主题配色简单大方，甚是喜爱。可是默认导航栏的样子是这样的生命在于折腾，如何自定义导航栏呢？于是抽时间折腾了一下，变成了下面这样：记录一下如何折腾的，如果有遇到同样困难的小朋友或许可以参考一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自行修改Hexo主题">
+<meta property="og:url" content="http://www.hfxblog.com/2016/06/21/自行修改Hexo主题/index.html">
+<meta property="og:site_name" content="HFX的BLOG">
+<meta property="og:description" content="折腾一下导航栏，相信很多用Hexo搭建博客的小伙伴们都使用了Apollo主题，这个主题配色简单大方，甚是喜爱。可是默认导航栏的样子是这样的生命在于折腾，如何自定义导航栏呢？于是抽时间折腾了一下，变成了下面这样：记录一下如何折腾的，如果有遇到同样困难的小朋友或许可以参考一下">
+<meta property="og:image" content="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-org-nav.png">
+<meta property="og:image" content="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-nav-result.png">
+<meta property="og:updated_time" content="2016-08-19T02:32:48.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自行修改Hexo主题">
+<meta name="twitter:description" content="折腾一下导航栏，相信很多用Hexo搭建博客的小伙伴们都使用了Apollo主题，这个主题配色简单大方，甚是喜爱。可是默认导航栏的样子是这样的生命在于折腾，如何自定义导航栏呢？于是抽时间折腾了一下，变成了下面这样：记录一下如何折腾的，如果有遇到同样困难的小朋友或许可以参考一下">
+<meta name="twitter:image" content="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-org-nav.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.hfxblog.com/2016/06/21/自行修改Hexo主题/"/>
+
+  <title> 自行修改Hexo主题 | HFX的BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HFX的BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">精力分配决定层次</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tool">
+          <a href="/tool" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            小工具
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自行修改Hexo主题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-21T23:46:45+08:00" content="2016-06-21">
+              2016-06-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/折腾/" itemprop="url" rel="index">
+                    <span itemprop="name">折腾</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/21/自行修改Hexo主题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/21/自行修改Hexo主题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>折腾一下导航栏，相信很多用Hexo搭建博客的小伙伴们都使用了Apollo主题，这个主题配色简单大方，甚是喜爱。可是默认导航栏的样子是这样的<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-org-nav.png" alt="Apollo默认导航栏" title="默认导航栏的样子"><br>生命在于折腾，如何自定义导航栏呢？于是抽时间折腾了一下，变成了下面这样：<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-nav-result.png" alt="修改之后的导航栏" title="修改之后的样子"><br>记录一下如何折腾的，如果有遇到同样困难的小朋友或许可以参考一下<br><a id="more"></a></p>
+<h4 id="1-删除主题子模块"><a href="#1-删除主题子模块" class="headerlink" title="1. 删除主题子模块"></a>1. 删除主题子模块</h4><p>先说一下博客项目的结构</p>
+<ul>
+<li>博客托管在<a href="https://coding.net" target="_blank" rel="external">Coding</a>的，使用<code>hexo generate</code>之后的静态文件是放在<code>coding-pages</code>分支</li>
+<li>而博客的项目源文件我是直接保存在<code>master</code>分支的</li>
+</ul>
+<p>每次使用markdown写完文章，将源文件推送到<code>master</code>，然后将生成的静态页面发布到<code>coding-pages</code>。</p>
+<p>如果按照<a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank" rel="external">Apollo</a>主题官方的安装方式，使用<code>git clone</code>到<code>theme</code>文件夹，那么主题是一个匿名子模块（submodule）的方式存在于项目中的。如果是这样，我们修改主题文件会遇到问题，推送到<code>master</code>分支的文件是不包含子模块改动的，如果换一台电脑，<code>git clone/pull</code>下来的文件是不会包含主题改动的。保持子模块的好处是，如果Apollo主题的作者有更新主题，我们可以直接<code>cd</code>到子模块目录使用<code>git pull</code>更新即可。可是现在我们修改主题，那么我们则不再关注原主题是否更新了，所以要先删除主题作为子模块的存在，然后将修改的主题文件直接纳入博客项目源码的管理。删除子模块，在博客项目的根目录，执行如下代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm --cached themes/apollo</div></pre></td></tr></table></figure></p>
+<p>再将主题目录下的文件add到git提交即可。</p>
+<h4 id="2-修改主题配置文件"><a href="#2-修改主题配置文件" class="headerlink" title="2. 修改主题配置文件"></a>2. 修改主题配置文件</h4><p>找到apollo文件夹下的<code>_config.yml</code>文件，打开之后默认的目录数据结构是不满足我们修改要求的<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">    Blog:</span> /</div><div class="line"><span class="attr">    Archive:</span> /archives/</div><div class="line"><span class="attr">    Weibo:</span> http://weibo.com/sunchongsheng</div><div class="line"><span class="attr">    GitHub:</span> https://github.com/pinggod</div><div class="line"><span class="attr">    Rss:</span> /atom.xml</div></pre></td></tr></table></figure></p>
+<p>因为我们要为每个栏目配上图标。</p>
+<p>但是发现这个<code>*.yml</code>有是个什么鬼文件？查一查发现，又有人发明了一个轮子叫<a href="https://zh.wikipedia.org/wiki/YAML" target="_blank" rel="external">YAML</a>。经查阅得知，YAML其实是包含JSON的，JSON是属于YAML的一个子集，意思就是我们可以直接写JSON格式；但是为了尊重这个轮子，我们还是用它新创建的语法更新一下我们的菜单结构<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  - name:</span> Blog</div><div class="line"><span class="attr">    path:</span> /</div><div class="line"><span class="attr">    icon:</span> fa fa-home</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> Archive</div><div class="line"><span class="attr">    path:</span> /archives/</div><div class="line"><span class="attr">    icon:</span> fa fa-folder-open-o</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> Weibo</div><div class="line"><span class="attr">    path:</span> http://weibo.com/fengxianhe</div><div class="line"><span class="attr">    icon:</span> fa fa-weibo</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> GitHub</div><div class="line"><span class="attr">    path:</span> https://github.com/hefengxian</div><div class="line"><span class="attr">    icon:</span> fa fa-github-alt</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> Coding</div><div class="line"><span class="attr">    path:</span> https://coding.net/u/hfx</div><div class="line"><span class="attr">    icon:</span> iconfont coding</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> About</div><div class="line"><span class="attr">    path:</span> /about/</div><div class="line"><span class="attr">    icon:</span> fa fa-info-circle</div></pre></td></tr></table></figure></p>
+<p>代码的意思大致就是一个包含多个对象的数组，其中<code>name</code>表示要菜单要显示的文字，<code>path</code>表示url路径，<code>icon</code>表示我们要使用的图标（Font Awesome 格式）。这样更新之后去看下结果，肯定是菜单都不见了，因为我们改了数据结构。</p>
+<h4 id="3-修改其他相关模板文件"><a href="#3-修改其他相关模板文件" class="headerlink" title="3. 修改其他相关模板文件"></a>3. 修改其他相关模板文件</h4><p>Apollo使用的是JADE，但是我并不懂JADE，但是看看<code>themes/apollo/layout/partial/nav.jade</code>的代码，虽然没接触过，但是凭借对其他编程语言的理解大致可以猜出语法，那么我们做一下改动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ul.nav.nav-list</div><div class="line">    each value, key in theme.menu</div><div class="line">        li.nav-list-item</div><div class="line">            - var re = /^(http|https):\/\/*/gi;</div><div class="line">            - var tar = re.test(value.path) ? &quot;_blank&quot; : &quot;_self&quot;</div><div class="line">            a.nav-list-link(class=&#123;active: is_home() &amp;&amp; value.path === &quot;/&quot;&#125; href=value.path target=tar)</div><div class="line">                i(class=value.icon) &amp;nbsp;</div><div class="line">                != value.name</div></pre></td></tr></table></figure></p>
+<p>使用hexo生成一下文件，看一下效果，发现菜单名字有了，但是还没有图标。</p>
+<p>是因为我们还没有引入Font-Awesome相关的css文件，打开<code>themes/apollo/layout/partial/head.jade</code>，虽然还是不懂JADE是什么鬼，依葫芦画瓢，在原来的apollo.css那句后面或者前面加一句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;))</div><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;css/apollo.css&quot;))</div></pre></td></tr></table></figure></p>
+<p>在这里我用的是<a href="http://www.bootcdn.cn/" target="_blank" rel="external">bootcdn</a>的CDN。</p>
+<p>再看一下，啊，大部分可以了，但是Font-Awesome这个项目并没有Coding的图标，但是我又很喜欢Coding，想把Coding放上去，那咋整呢？</p>
+<p>以前记得淘宝好像有个字体图标的网站<a href="http://iconfont.cn/" target="_blank" rel="external">ICONFONT</a>，反正就是无意中发现的这么一个网站，往里面一搜coding，居然还真有人做了这个图标。</p>
+<p>在网站上下载图标，按照文档，将字体文件复制到<code>themes/apollo/source/fonts/</code>目录下，在网站上下载图标，按照文档，将字体文件复制到<code>themes/apollo/source/fonts/</code>目录下,我们在目录<code>themes/apollo/source/css/</code>下加入<code>iconfont.css</code>文件<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">font-face</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">"iconfont"</span>;</div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.eot?t=1466522057'</span>); <span class="comment">/* IE9*/</span></div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.eot?t=1466522057#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>), <span class="comment">/* IE6-IE8 */</span></div><div class="line">    <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.woff?t=1466522057'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>), <span class="comment">/* chrome, firefox */</span></div><div class="line">    <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.ttf?t=1466522057'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>), <span class="comment">/* chrome, firefox, opera, Safari, Android, iOS 4.2+*/</span></div><div class="line">    <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.svg?t=1466522057#iconfont'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>); <span class="comment">/* iOS 4.1- */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.iconfont</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>:<span class="string">"iconfont"</span> <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">16px</span>;</div><div class="line">    <span class="attribute">font-style</span>:normal;</div><div class="line">    <span class="attribute">-webkit-font-smoothing</span>: antialiased;</div><div class="line">    <span class="attribute">-webkit-text-stroke-width</span>: <span class="number">0.2px</span>;</div><div class="line">    <span class="attribute">-moz-osx-font-smoothing</span>: grayscale;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.coding</span><span class="selector-pseudo">:before</span> &#123; <span class="attribute">content</span>: <span class="string">"\e604"</span>; &#125;</div></pre></td></tr></table></figure></p>
+<p>我们将新加css文件引入到页面，打开<code>themes/apollo/layout/partial/head.jade</code>，和前面引入Font-Awesome一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;))</div><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;css/iconfont.css&quot;))</div><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;css/apollo.css&quot;))</div></pre></td></tr></table></figure></p>
+<p>这个时候再看一下效果，发现图标已经有了，可是大小好像有问题，很小…，于是我们打开Chrome调试工具，调整<code>.iconfont</code>样式的字体大小，发现<code>20px</code>差不多，那么再次修改一下文件<code>iconfont.css</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.iconfont</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>:<span class="string">"iconfont"</span> <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">20px</span>;</div><div class="line">    <span class="attribute">font-style</span>:normal;</div><div class="line">    <span class="attribute">-webkit-font-smoothing</span>: antialiased;</div><div class="line">    <span class="attribute">-webkit-text-stroke-width</span>: <span class="number">0.2px</span>;</div><div class="line">    <span class="attribute">-moz-osx-font-smoothing</span>: grayscale;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再刷新一下，终于可以了，得到了我们想要的结果。</p>
+<p>多说一句，博客的Logo自己去找一个图片，保持格式名称一样（其实可以有其他的格式，但是自己可以去查一查favicon支持哪些格式），或者自己画一个替换<code>themes/apollo/source/favicon.png</code></p>
+<p>参考资料：</p>
+<ul>
+<li>YAML <a href="https://zh.wikipedia.org/wiki/YAML" target="_blank" rel="external">YAML维基百科</a></li>
+<li>JADE <a href="http://jade-lang.com/" target="_blank" rel="external">JADE官网</a></li>
+<li>Font-Awesome <a href="http://fontawesome.io/" target="_blank" rel="external">font-awesome</a></li>
+<li>淘宝 ICONFONT <a href="http://iconfont.cn/" target="_blank" rel="external">ICONFONT</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/折腾/" rel="tag">#折腾</a>
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+            <a href="/tags/Theme/" rel="tag">#Theme</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/21/停止完美主义/" rel="next" title="停止完美主义">
+                <i class="fa fa-chevron-left"></i> 停止完美主义
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/27/晚睡/" rel="prev" title="晚睡">
+                晚睡 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/21/自行修改Hexo主题/"
+           data-title="自行修改Hexo主题" data-url="http://www.hfxblog.com/2016/06/21/自行修改Hexo主题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="HFX" />
+          <p class="site-author-name" itemprop="name">HFX</p>
+          <p class="site-description motion-element" itemprop="description">没事多写写</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-删除主题子模块"><span class="nav-number">1.</span> <span class="nav-text">1. 删除主题子模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-修改主题配置文件"><span class="nav-number">2.</span> <span class="nav-text">2. 修改主题配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-修改其他相关模板文件"><span class="nav-number">3.</span> <span class="nav-text">3. 修改其他相关模板文件</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HFX</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hefengxian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+         processEscapes: true,
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+       }
+     });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

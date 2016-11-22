@@ -1,0 +1,820 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="读书笔记,TCP/IP详解," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HFX的BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="引言很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。
+本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《TCP/IP详解》第一章 概述">
+<meta property="og:url" content="http://www.hfxblog.com/2016/08/22/TCP-IP详解第一章/index.html">
+<meta property="og:site_name" content="HFX的BLOG">
+<meta property="og:description" content="引言很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。
+本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。">
+<meta property="og:image" content="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3_IP%E5%B0%81%E8%A3%85_new.svg">
+<meta property="og:image" content="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3%E7%AC%94%E8%AE%B0%E6%8E%A8%E5%9B%BE%E2%80%94%E2%80%94%E5%88%86%E7%94%A8.svg">
+<meta property="og:updated_time" content="2016-09-08T03:46:55.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《TCP/IP详解》第一章 概述">
+<meta name="twitter:description" content="引言很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。
+本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。">
+<meta name="twitter:image" content="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3_IP%E5%B0%81%E8%A3%85_new.svg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.hfxblog.com/2016/08/22/TCP-IP详解第一章/"/>
+
+  <title> 《TCP/IP详解》第一章 概述 | HFX的BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HFX的BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">精力分配决定层次</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tool">
+          <a href="/tool" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            小工具
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《TCP/IP详解》第一章 概述
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-22T17:58:15+08:00" content="2016-08-22">
+              2016-08-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/《TCP-IP详解》笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">《TCP/IP详解》笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/22/TCP-IP详解第一章/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/22/TCP-IP详解第一章/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现<br>可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。</p>
+<p>本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。</p>
+<a id="more"></a>
+<h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>网络协议通常分不同层次进行开发，每一层分别负责不同的通信功能。一个协议族，比如TCP/IP，是一组不同层次上的多个协议的组合。TCP/IP通常被任务是一个四层协议系统。</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>Telnet、FTP和e-mail等</td>
+</tr>
+<tr>
+<td>运输层</td>
+<td>TCP和UDP</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP、ICMP和IGMP</td>
+</tr>
+<tr>
+<td>链路层</td>
+<td>设备驱动程序以及接口卡</td>
+</tr>
+</tbody>
+</table>
+<p>每一层负责不同的功能：</p>
+<ol>
+<li><p><strong>链路层</strong>，有时也成为数据链路层或网络接口层，通常包括操作兄台哪个中的设备驱动程序和计算机中对应网络接口卡。它们一起处理与电缆（或其他任何的传输媒介）的物理接口细节。</p>
+</li>
+<li><p><strong>网络层</strong>，有时也称作互联网层，处理分组咋网络中的活动，例如分组的选路。在TCP/IP协议族中，网络层协议包括IP协议（网际协议），ICMP协议（Internet互联网控制报文协议），以及IGMP协议（Internet组管理协议）。</p>
+</li>
+<li><p><strong>运输层</strong>，主要为两台主机上的应用程序提供端到端的通信。在TCP/IP协议族中，有两个互不相同的传输协议：TCP（传输控制协议）和UDP（用户数据报协议）。<br>TCP为两台主机提供高可靠的数据通信。它所做的工作包括把应用程序交给它的数据分成合适的小块交给下面的网络层，确认接收到的分组，设置发送最后确认分组的超时时钟等。由于运输层提供了高可靠性的端到端通信，因此应用层可以忽略所有这些细节。<br>UDP则为应用层提供一种非常简单的服务。它只是把称作数据报的分组从一台主机发送到另一台主机，但并不保证该数据报能到达另一端。任何必需的可靠性必须由应用层来提供。</p>
+</li>
+<li><p><strong>应用层</strong>，负责处理特定的应用程序细节。几乎各种不同的TCP/IP实现都会提供下面这些通用的应用程序。</p>
+<ul>
+<li>Telnet 远程登录。</li>
+<li>FTP 文件传输协议。</li>
+<li>SMTP 简单右键传送协议。</li>
+<li>SNMP 简单网络管理协议。</li>
+</ul>
+</li>
+</ol>
+<p>构造互联网最简单的方法是把两个或者多个网络通过路由器进行连接。它是一种特殊的用于网络互联的硬件盒。路由器的好处是为不同的物理网络提供连接：以太网、令牌环网、点对点的连接和FDDI（光纤分布式数据接口）等等。</p>
+<h2 id="TCP-IP的分层"><a href="#TCP-IP的分层" class="headerlink" title="TCP/IP的分层"></a>TCP/IP的分层</h2><p>TCP和UDP是两种最为著名的运输层协议，二者豆使用IP作为网络层协议。</p>
+<ul>
+<li><strong>TCP</strong>，虽然TCP使用不可靠的IP服务，但它阙提供一种可靠的运输层服务。</li>
+<li><strong>UDP</strong>，为应用程序发送和接收数据报。一个数据是指从发送方传输到接收方的一个信息单元。但是与TCP不同的是，UDP是不可靠的，它不能保证数据报能安全无误的到达最终目的地。</li>
+<li><strong>IP</strong>，是网络层上主要协议，同时被TCP和UDP使用。TCP和UDP的每族数据都通过端系统和每个中间路由器中的IP层在互联网中进行传输。</li>
+<li><strong>ICMP</strong>，是IP协议的附属协议，IP层用它来与其他主机或路由器交换错误报文和其他重要信息。</li>
+<li><strong>IGMP</strong>，是Internet组管理协议。它用来把一个UDP数据报多到多个主机。</li>
+<li><strong>ARP</strong>，地址解析协议和RARP（逆地址解析协议）是某些网络接口（如以太网和令牌环网）使用的特殊协议，用来转换IP层和网络接口层使用的地址。</li>
+</ul>
+<h2 id="互联网的地址"><a href="#互联网的地址" class="headerlink" title="互联网的地址"></a>互联网的地址</h2><p>互联网上的每个接口必有有个唯一的Internet地址（也称作IP地址）。IP地址长32bit。Internet地址并不采用平面形式的地址空间，如1、2、3等。IP地址是具有一定结构的，五类不同的互联网地址格式如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:left">固定位（二进制）</th>
+<th style="text-align:left">网络号长度</th>
+<th style="text-align:left">主机号长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A类</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">7 bit</td>
+<td style="text-align:left">24 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">B类</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left">14 bit</td>
+<td style="text-align:left">16 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">C类</td>
+<td style="text-align:left">110</td>
+<td style="text-align:left">21 bit</td>
+<td style="text-align:left">8 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">D类</td>
+<td style="text-align:left">1110</td>
+<td style="text-align:left">28 bit（多播组号）</td>
+</tr>
+<tr>
+<td style="text-align:center">E类</td>
+<td style="text-align:left">11110</td>
+<td style="text-align:left">27 bit（留待后用）</td>
+</tr>
+</tbody>
+</table>
+<p>这些32位的地址通写成4个十进制的数，其中每个整数对应一个字节。这种表示方法称作“点分十进制表示法（Dotted decimal notation）”。<br>区分各类地址的最简单方法就是看它的第一个十进制整数。如下表，其中第一个十进制整数用粗体表示。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:right">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类</td>
+<td style="text-align:right"><strong>0</strong>.0.0.0 - <strong>127</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>B类</td>
+<td style="text-align:right"><strong>128</strong>.0.0.0 - <strong>191</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>C类</td>
+<td style="text-align:right"><strong>192</strong>.0.0.0 - <strong>223</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>D类</td>
+<td style="text-align:right"><strong>224</strong>.0.0.0 - <strong>239</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>E类</td>
+<td style="text-align:right"><strong>240</strong>.0.0.0 - <strong>255</strong>.255.255.255</td>
+</tr>
+</tbody>
+</table>
+<p>需要指出的是，多接口主机具有多个IP地址，其中每个接口对对应一个IP地址（比如笔记本电脑的WIFI和网线有不同的IP）。</p>
+<p>由于互联网上的每个接口都必须有一个唯一的IP地址，因此必须要有一个管理机构为接入互联网的网络分配IP地址。这个管理机构就是互联网信息中心（Internet Network Information Center），称作InterNIC。InterNIC只分配网络号。主机号的分配由系统管理员来负责。</p>
+<p>有三类IP地址：</p>
+<ul>
+<li>单播地址，目的端为单个主机。</li>
+<li>广播地址，目的端为给定网路上的所有主机。</li>
+<li>多播地址，目的端为同一个组内的所有主机。</li>
+</ul>
+<h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><p>尽管通过IP地址可以识别主机上的网络接口，进而访问主机，但是人们最喜欢使用的还是主机名，在TCP/IP领域中，域名系统（DNS）是一个分布的数据库，由它来提供IP地址和主机名之间的映射信息。</p>
+<p>我们可以理解为，任何应用程序都可以调用一个标准的库函数来查看给定名字的主机IP地址，反之，系统也提供一个逆函数——给定主机的IP地址，查看它所对应的主机名。例如，当我们使用Telnet进行远程登录时，既可以指定IP也可以指定主机名。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>当应用程序用TCP传送数据时，数据被送入协议栈中，然后逐个通过每一层知道被当作一串比特流送入网络。其中每一层对收到的数据都要增加一些首部或者尾部信息。过程如下图，TCP传给IP的数据单元称作TCP报文段或简成为TCP段（TCP segment）。IP传给网络接口的数据单元称作IP数据报（IP datagram）。通过以太网传输的比特流称作为帧（Frame）。<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3_IP%E5%B0%81%E8%A3%85_new.svg" alt="IP封装"><br>UDP数据与TCP的数据基本一致。唯一不同的是UDP传给IP的信息单元称作UDP数据报（UDP datagram），而且UDP的首部长为8字节。</p>
+<p>由于TCP、UDP、ICMP、IGMP都要像IP传送数据，一次IP必须在IP的首部加入某种标识，以表明数据属于哪一层。为此，IP在首部加入一个长度为8bit的数值，称之为协议域。其中</p>
+<ul>
+<li><strong>1</strong>表示为ICMP协议。</li>
+<li><strong>2</strong>表示为IGMP协议。</li>
+<li><strong>6</strong>表示为TCP协议。</li>
+<li><strong>17</strong>表示为UDP协议。</li>
+</ul>
+<p>类似的，许多的应用程序都可以使用TCP或者UDP来传送数据。运输层协议在生成报文首部时要存入一个应用程序的标识符。TCP和UDP都用一个16bit的端口号来表示不同的应用程序。TCP和UDP把端口号和目的端口号分别存入报文首部中。</p>
+<p>网络接口分别要发送和接收IP、ARP和RARP数据，因此也必须在以太网的帧首部加入某种形式的标识，以指明生成数据的网络层协议。为此，以太网的帧首部也有一个16bit的帧类型域。</p>
+<h2 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h2><p>当目的主机收到一个以太网数据帧时，数据就开始从协议栈中由底向上升，同时去掉各层协议加上的报文首部。每层协议都要检查报文首部中的协议标识，以确定接收数据的上层协议。这个过程被称作分用（Demultiplexing）<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3%E7%AC%94%E8%AE%B0%E6%8E%A8%E5%9B%BE%E2%80%94%E2%80%94%E5%88%86%E7%94%A8.svg" alt="分用"></p>
+<h2 id="客户-服务器模型"><a href="#客户-服务器模型" class="headerlink" title="客户-服务器模型"></a>客户-服务器模型</h2><p>大部分网络应用程序在编写时都假设一端是客户，一端是服务器，目的是为了让服务器为客户提供某些服务。</p>
+<p>可以将这种服务分为两种类型：重复型或并发型。简而言之，重复型一般是同步当线程的；并发是异步多线程的。</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><h2 id="标准化过程"><a href="#标准化过程" class="headerlink" title="标准化过程"></a>标准化过程</h2><h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><h2 id="标准的简单服务"><a href="#标准的简单服务" class="headerlink" title="标准的简单服务"></a>标准的简单服务</h2><h2 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="应用编程接口"><a href="#应用编程接口" class="headerlink" title="应用编程接口"></a>应用编程接口</h2><h2 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+            <a href="/tags/TCP-IP详解/" rel="tag">#TCP/IP详解</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/19/ItA-Chapter-02算法基础/" rel="next" title="第二章 算法基础">
+                <i class="fa fa-chevron-left"></i> 第二章 算法基础
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/22/TCP-IP详解第一章/"
+           data-title="《TCP/IP详解》第一章 概述" data-url="http://www.hfxblog.com/2016/08/22/TCP-IP详解第一章/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="HFX" />
+          <p class="site-author-name" itemprop="name">HFX</p>
+          <p class="site-description motion-element" itemprop="description">没事多写写</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层"><span class="nav-number">2.</span> <span class="nav-text">分层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP的分层"><span class="nav-number">3.</span> <span class="nav-text">TCP/IP的分层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互联网的地址"><span class="nav-number">4.</span> <span class="nav-text">互联网的地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名系统"><span class="nav-number">5.</span> <span class="nav-text">域名系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">6.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分用"><span class="nav-number">7.</span> <span class="nav-text">分用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户-服务器模型"><span class="nav-number">8.</span> <span class="nav-text">客户-服务器模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口号"><span class="nav-number">9.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准化过程"><span class="nav-number">10.</span> <span class="nav-text">标准化过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RFC"><span class="nav-number">11.</span> <span class="nav-text">RFC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准的简单服务"><span class="nav-number">12.</span> <span class="nav-text">标准的简单服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互联网"><span class="nav-number">13.</span> <span class="nav-text">互联网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">14.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用编程接口"><span class="nav-number">15.</span> <span class="nav-text">应用编程接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试网络"><span class="nav-number">16.</span> <span class="nav-text">测试网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">17.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HFX</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hefengxian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+         processEscapes: true,
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+       }
+     });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

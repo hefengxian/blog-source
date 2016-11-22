@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HFX的BLOG</title>
+  <subtitle>精力分配决定层次</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.hfxblog.com/"/>
+  <updated>2016-09-08T03:46:55.614Z</updated>
+  <id>http://www.hfxblog.com/</id>
+  
+  <author>
+    <name>HFX</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《TCP/IP详解》第一章 概述</title>
+    <link href="http://www.hfxblog.com/2016/08/22/TCP-IP%E8%AF%A6%E8%A7%A3%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
+    <id>http://www.hfxblog.com/2016/08/22/TCP-IP详解第一章/</id>
+    <published>2016-08-22T09:58:15.000Z</published>
+    <updated>2016-09-08T03:46:55.614Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现<br>可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。</p>
+<p>本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。</p>
+<a id="more"></a>
+<h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>网络协议通常分不同层次进行开发，每一层分别负责不同的通信功能。一个协议族，比如TCP/IP，是一组不同层次上的多个协议的组合。TCP/IP通常被任务是一个四层协议系统。</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>Telnet、FTP和e-mail等</td>
+</tr>
+<tr>
+<td>运输层</td>
+<td>TCP和UDP</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP、ICMP和IGMP</td>
+</tr>
+<tr>
+<td>链路层</td>
+<td>设备驱动程序以及接口卡</td>
+</tr>
+</tbody>
+</table>
+<p>每一层负责不同的功能：</p>
+<ol>
+<li><p><strong>链路层</strong>，有时也成为数据链路层或网络接口层，通常包括操作兄台哪个中的设备驱动程序和计算机中对应网络接口卡。它们一起处理与电缆（或其他任何的传输媒介）的物理接口细节。</p>
+</li>
+<li><p><strong>网络层</strong>，有时也称作互联网层，处理分组咋网络中的活动，例如分组的选路。在TCP/IP协议族中，网络层协议包括IP协议（网际协议），ICMP协议（Internet互联网控制报文协议），以及IGMP协议（Internet组管理协议）。</p>
+</li>
+<li><p><strong>运输层</strong>，主要为两台主机上的应用程序提供端到端的通信。在TCP/IP协议族中，有两个互不相同的传输协议：TCP（传输控制协议）和UDP（用户数据报协议）。<br>TCP为两台主机提供高可靠的数据通信。它所做的工作包括把应用程序交给它的数据分成合适的小块交给下面的网络层，确认接收到的分组，设置发送最后确认分组的超时时钟等。由于运输层提供了高可靠性的端到端通信，因此应用层可以忽略所有这些细节。<br>UDP则为应用层提供一种非常简单的服务。它只是把称作数据报的分组从一台主机发送到另一台主机，但并不保证该数据报能到达另一端。任何必需的可靠性必须由应用层来提供。</p>
+</li>
+<li><p><strong>应用层</strong>，负责处理特定的应用程序细节。几乎各种不同的TCP/IP实现都会提供下面这些通用的应用程序。</p>
+<ul>
+<li>Telnet 远程登录。</li>
+<li>FTP 文件传输协议。</li>
+<li>SMTP 简单右键传送协议。</li>
+<li>SNMP 简单网络管理协议。</li>
+</ul>
+</li>
+</ol>
+<p>构造互联网最简单的方法是把两个或者多个网络通过路由器进行连接。它是一种特殊的用于网络互联的硬件盒。路由器的好处是为不同的物理网络提供连接：以太网、令牌环网、点对点的连接和FDDI（光纤分布式数据接口）等等。</p>
+<h2 id="TCP-IP的分层"><a href="#TCP-IP的分层" class="headerlink" title="TCP/IP的分层"></a>TCP/IP的分层</h2><p>TCP和UDP是两种最为著名的运输层协议，二者豆使用IP作为网络层协议。</p>
+<ul>
+<li><strong>TCP</strong>，虽然TCP使用不可靠的IP服务，但它阙提供一种可靠的运输层服务。</li>
+<li><strong>UDP</strong>，为应用程序发送和接收数据报。一个数据是指从发送方传输到接收方的一个信息单元。但是与TCP不同的是，UDP是不可靠的，它不能保证数据报能安全无误的到达最终目的地。</li>
+<li><strong>IP</strong>，是网络层上主要协议，同时被TCP和UDP使用。TCP和UDP的每族数据都通过端系统和每个中间路由器中的IP层在互联网中进行传输。</li>
+<li><strong>ICMP</strong>，是IP协议的附属协议，IP层用它来与其他主机或路由器交换错误报文和其他重要信息。</li>
+<li><strong>IGMP</strong>，是Internet组管理协议。它用来把一个UDP数据报多到多个主机。</li>
+<li><strong>ARP</strong>，地址解析协议和RARP（逆地址解析协议）是某些网络接口（如以太网和令牌环网）使用的特殊协议，用来转换IP层和网络接口层使用的地址。</li>
+</ul>
+<h2 id="互联网的地址"><a href="#互联网的地址" class="headerlink" title="互联网的地址"></a>互联网的地址</h2><p>互联网上的每个接口必有有个唯一的Internet地址（也称作IP地址）。IP地址长32bit。Internet地址并不采用平面形式的地址空间，如1、2、3等。IP地址是具有一定结构的，五类不同的互联网地址格式如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:left">固定位（二进制）</th>
+<th style="text-align:left">网络号长度</th>
+<th style="text-align:left">主机号长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A类</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">7 bit</td>
+<td style="text-align:left">24 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">B类</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left">14 bit</td>
+<td style="text-align:left">16 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">C类</td>
+<td style="text-align:left">110</td>
+<td style="text-align:left">21 bit</td>
+<td style="text-align:left">8 bit</td>
+</tr>
+<tr>
+<td style="text-align:center">D类</td>
+<td style="text-align:left">1110</td>
+<td style="text-align:left">28 bit（多播组号）</td>
+</tr>
+<tr>
+<td style="text-align:center">E类</td>
+<td style="text-align:left">11110</td>
+<td style="text-align:left">27 bit（留待后用）</td>
+</tr>
+</tbody>
+</table>
+<p>这些32位的地址通写成4个十进制的数，其中每个整数对应一个字节。这种表示方法称作“点分十进制表示法（Dotted decimal notation）”。<br>区分各类地址的最简单方法就是看它的第一个十进制整数。如下表，其中第一个十进制整数用粗体表示。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:right">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类</td>
+<td style="text-align:right"><strong>0</strong>.0.0.0 - <strong>127</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>B类</td>
+<td style="text-align:right"><strong>128</strong>.0.0.0 - <strong>191</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>C类</td>
+<td style="text-align:right"><strong>192</strong>.0.0.0 - <strong>223</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>D类</td>
+<td style="text-align:right"><strong>224</strong>.0.0.0 - <strong>239</strong>.255.255.255</td>
+</tr>
+<tr>
+<td>E类</td>
+<td style="text-align:right"><strong>240</strong>.0.0.0 - <strong>255</strong>.255.255.255</td>
+</tr>
+</tbody>
+</table>
+<p>需要指出的是，多接口主机具有多个IP地址，其中每个接口对对应一个IP地址（比如笔记本电脑的WIFI和网线有不同的IP）。</p>
+<p>由于互联网上的每个接口都必须有一个唯一的IP地址，因此必须要有一个管理机构为接入互联网的网络分配IP地址。这个管理机构就是互联网信息中心（Internet Network Information Center），称作InterNIC。InterNIC只分配网络号。主机号的分配由系统管理员来负责。</p>
+<p>有三类IP地址：</p>
+<ul>
+<li>单播地址，目的端为单个主机。</li>
+<li>广播地址，目的端为给定网路上的所有主机。</li>
+<li>多播地址，目的端为同一个组内的所有主机。</li>
+</ul>
+<h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><p>尽管通过IP地址可以识别主机上的网络接口，进而访问主机，但是人们最喜欢使用的还是主机名，在TCP/IP领域中，域名系统（DNS）是一个分布的数据库，由它来提供IP地址和主机名之间的映射信息。</p>
+<p>我们可以理解为，任何应用程序都可以调用一个标准的库函数来查看给定名字的主机IP地址，反之，系统也提供一个逆函数——给定主机的IP地址，查看它所对应的主机名。例如，当我们使用Telnet进行远程登录时，既可以指定IP也可以指定主机名。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>当应用程序用TCP传送数据时，数据被送入协议栈中，然后逐个通过每一层知道被当作一串比特流送入网络。其中每一层对收到的数据都要增加一些首部或者尾部信息。过程如下图，TCP传给IP的数据单元称作TCP报文段或简成为TCP段（TCP segment）。IP传给网络接口的数据单元称作IP数据报（IP datagram）。通过以太网传输的比特流称作为帧（Frame）。<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3_IP%E5%B0%81%E8%A3%85_new.svg" alt="IP封装"><br>UDP数据与TCP的数据基本一致。唯一不同的是UDP传给IP的信息单元称作UDP数据报（UDP datagram），而且UDP的首部长为8字节。</p>
+<p>由于TCP、UDP、ICMP、IGMP都要像IP传送数据，一次IP必须在IP的首部加入某种标识，以表明数据属于哪一层。为此，IP在首部加入一个长度为8bit的数值，称之为协议域。其中</p>
+<ul>
+<li><strong>1</strong>表示为ICMP协议。</li>
+<li><strong>2</strong>表示为IGMP协议。</li>
+<li><strong>6</strong>表示为TCP协议。</li>
+<li><strong>17</strong>表示为UDP协议。</li>
+</ul>
+<p>类似的，许多的应用程序都可以使用TCP或者UDP来传送数据。运输层协议在生成报文首部时要存入一个应用程序的标识符。TCP和UDP都用一个16bit的端口号来表示不同的应用程序。TCP和UDP把端口号和目的端口号分别存入报文首部中。</p>
+<p>网络接口分别要发送和接收IP、ARP和RARP数据，因此也必须在以太网的帧首部加入某种形式的标识，以指明生成数据的网络层协议。为此，以太网的帧首部也有一个16bit的帧类型域。</p>
+<h2 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h2><p>当目的主机收到一个以太网数据帧时，数据就开始从协议栈中由底向上升，同时去掉各层协议加上的报文首部。每层协议都要检查报文首部中的协议标识，以确定接收数据的上层协议。这个过程被称作分用（Demultiplexing）<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/TCP_IP%E8%AF%A6%E8%A7%A3%E7%AC%94%E8%AE%B0%E6%8E%A8%E5%9B%BE%E2%80%94%E2%80%94%E5%88%86%E7%94%A8.svg" alt="分用"></p>
+<h2 id="客户-服务器模型"><a href="#客户-服务器模型" class="headerlink" title="客户-服务器模型"></a>客户-服务器模型</h2><p>大部分网络应用程序在编写时都假设一端是客户，一端是服务器，目的是为了让服务器为客户提供某些服务。</p>
+<p>可以将这种服务分为两种类型：重复型或并发型。简而言之，重复型一般是同步当线程的；并发是异步多线程的。</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><h2 id="标准化过程"><a href="#标准化过程" class="headerlink" title="标准化过程"></a>标准化过程</h2><h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><h2 id="标准的简单服务"><a href="#标准的简单服务" class="headerlink" title="标准的简单服务"></a>标准的简单服务</h2><h2 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="应用编程接口"><a href="#应用编程接口" class="headerlink" title="应用编程接口"></a>应用编程接口</h2><h2 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们通信。它是一个真正开放的系统，因为协议族的定义及其多种实现&lt;br&gt;可以不用花钱或花很少的钱就可以公开的得到。它被称作“全球互联网”或“因特网（Internet）”的基础，该广域网（WAN）已包含遍布世界的计算机。&lt;/p&gt;
+&lt;p&gt;本章主要对TCP/IP协议族进行概述，其目的是为本书的其余章节提供充分的背景知识。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="《TCP/IP详解》笔记" scheme="http://www.hfxblog.com/categories/%E3%80%8ATCP-IP%E8%AF%A6%E8%A7%A3%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.hfxblog.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="TCP/IP详解" scheme="http://www.hfxblog.com/tags/TCP-IP%E8%AF%A6%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第二章 算法基础</title>
+    <link href="http://www.hfxblog.com/2016/08/19/ItA-Chapter-02%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/"/>
+    <id>http://www.hfxblog.com/2016/08/19/ItA-Chapter-02算法基础/</id>
+    <published>2016-08-19T14:00:01.000Z</published>
+    <updated>2016-08-24T08:20:41.751Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。<br><a id="more"></a></p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>我们的第一个算法（插入排序）求解第1章中引入的<strong>排序问题</strong>：</p>
+<ul>
+<li><strong>输入</strong>：$n$ 个数的一个序列 $\langle a_1, a_2, \dotsm, a_n \rangle$ 。</li>
+<li><strong>输出</strong>：输入序列的一个排列 $\langle a’_{1}, a’_{2}, \dotsm, a’_{n} \rangle$ ，满足 $a’_{1} \leq a’_{2} \leq \dotsm \leq a’_{n}$</li>
+</ul>
+<p>我们希望排序的数也称为<strong>关键词</strong>。虽然概念上我们在排序一个序列，但是输入是以 $n$ 个元素的数组的形式出现的。</p>
+<p>我们通常将算法描述为用一种<strong>伪代码</strong>书写的程序，该伪代码在许多方面类似于C、C++、Java、Python或Pascal。伪代码和真代码的区别在于，伪代码使用最清晰、最简介的表示方法来说明给定的算法。</p>
+<p>插入排序，对于少量的元素排序，它是一个有效的算法。插入排序的工作方式像大家排序扑克牌一样。开始时，我们的左手为空并且桌面的牌面朝下。然后，我们每次从桌上拿一张牌，插入左手上正确的位置。为了找到一张牌的正确位置，我们从左到右将它与已经在手中的牌进行比较。这样拿在左手上的牌总是排序好的，原来这些牌都是桌子上牌堆中顶部的牌。</p>
+<p>对于插入排序，我们将其伪代码过程命名为<code>INSERTION-SORT</code>，其中参数是一个数组 $A[1 \dotsm n]$，包含长度为 $n$ 的要排序的一个序列。（在代码中，$A$ 中元素的数目 $n$ 用 $A.length$ 表示）该算法<strong>原址</strong>排序输入的数：算法在数组 $A$ 中重排这些数，在任何时候，最多只有其中的常数个数字存储在数组外。在过程<code>INSERTION-SORT</code>结束时，输入数组 $A$ 包含排序好的输出序列。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">INSERTION-SORT</span><span class="params">(A)</span></span></div><div class="line">    <span class="keyword">for</span> j = <span class="number">2</span> to A<span class="selector-class">.length</span></div><div class="line">        key = A[j]</div><div class="line">        <span class="comment">// Insert A[j] into the sorted sequence A[1...j - 1]</span></div><div class="line">        <span class="selector-tag">i</span> = j - <span class="number">1</span></div><div class="line">        while <span class="selector-tag">i</span> &gt; <span class="number">0</span> and A[i] &gt; key</div><div class="line">            A[<span class="selector-tag">i</span> + <span class="number">1</span>] = A[i]</div><div class="line">            <span class="selector-tag">i</span> = <span class="selector-tag">i</span> - <span class="number">1</span></div><div class="line">        A[<span class="selector-tag">i</span> + <span class="number">1</span>] = key</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章将要介绍一个贯穿本书的框架，后续的算法设计与分析都是在这个框架的=中进行的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="《算法导论》笔记" scheme="http://www.hfxblog.com/categories/%E3%80%8A%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法导论" scheme="http://www.hfxblog.com/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="读书笔记" scheme="http://www.hfxblog.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一章 算法在计算中的作用</title>
+    <link href="http://www.hfxblog.com/2016/08/17/ItA-Chapter-01%E7%AE%97%E6%B3%95%E5%9C%A8%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+    <id>http://www.hfxblog.com/2016/08/17/ItA-Chapter-01算法在计算中的作用/</id>
+    <published>2016-08-17T14:52:45.000Z</published>
+    <updated>2016-08-24T08:20:41.751Z</updated>
+    
+    <content type="html"><![CDATA[<p>什么是是算法？为什么算法值得研究？相对于计算机中使用的其他技术来说算法的作用是什么？</p>
+<a id="more"></a>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>非形式的说，<strong>算法(algorithm)</strong>就是任何良定义的计算过程，该过程取某个值或者值的集合作为<strong>输入</strong>并产生某个值或者值的集合作为<strong>输出</strong>。这样算法就是把输入转换成输出的计算步骤的一个序列。</p>
+<p>我们也可以把算法看成是用于求解良说明的计算问题的工具。一般来说，问题陈述说明了期望输入/输出关系。算法则描述一个特定的计算过程来实现该输入/输出关系。</p>
+<p>例如，我们可能需要把一个数列排成递增序。实际上，这个问题经常出现，并且为引入许多标准的设计和分析工具提供了足够的理由。下面是我们关于<strong>排序问题</strong>的形式定义。</p>
+<ul>
+<li><strong>输入</strong>：$n$ 个数的一个序列 $\langle a_1, a_2, \dotsm, a_n \rangle$ 。</li>
+<li><strong>输出</strong>：输入序列的一个排列 $\langle a’_{1}, a’_{2}, \dotsm, a’_{n} \rangle$ ，满足 $a’_{1} \leq a’_{2} \leq \dotsm \leq a’_{n}$</li>
+</ul>
+<p>例如，给定输入序列 $\langle 31, 41, 59, 26, 41, 58 \rangle$ ，排序算法将返回序列 $\langle 26, 31, 41,  41, 58, 59 \rangle$ 作为输出。这样的输入序列称为排序问题的一个<strong>实例(instance)</strong>。一般来说，<strong>问题实例</strong>由计算该问题所必需的（满足问题陈述中强加的各种约束的）的输入组成。</p>
+<p>若对每个输入实例，算法都以正确的输出停机，则称该算法是<strong>正确的</strong>，并称正确的算法<strong>解决了</strong>给定的计算问题。不正确的算法对某些输入可能根本不停机，也可能以不正确的回答停机。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;什么是是算法？为什么算法值得研究？相对于计算机中使用的其他技术来说算法的作用是什么？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="《算法导论》笔记" scheme="http://www.hfxblog.com/categories/%E3%80%8A%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法导论" scheme="http://www.hfxblog.com/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="读书笔记" scheme="http://www.hfxblog.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu Apahce2.4无法访问javascript目录的问题</title>
+    <link href="http://www.hfxblog.com/2016/08/16/Ubuntu-Apahce2-4%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEjavascript%E7%9B%AE%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.hfxblog.com/2016/08/16/Ubuntu-Apahce2-4无法访问javascript目录的问题/</id>
+    <published>2016-08-16T06:29:46.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>今天调试一个项目，项目放在<code>webroot</code>下面的<code>javascript</code>目录，无论怎么设置都是<code>403 You don&#39;t have permission to access /javascript/ on this server.</code></p>
+<a id="more"></a>
+<h4 id="思考过程"><a href="#思考过程" class="headerlink" title="思考过程"></a>思考过程</h4><p>首先第一反应，Google了错误<code>You don&#39;t have permission to access /javascript/ on this server.</code>，然后发现大部分答案都说到了配置文件中的<code>Directory</code>设置。比如<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;Directory /&gt;</span></div><div class="line">   <span class="attribute"><span class="nomarkup">Options</span></span> FollowSymLinks</div><div class="line">   <span class="attribute">AllowOverride</span> <span class="literal">All</span></div><div class="line">   <span class="attribute"><span class="nomarkup">Order</span></span> deny,allow</div><div class="line">   <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></div><div class="line"><span class="section">&lt;/Directory&gt;</span></div></pre></td></tr></table></figure></p>
+<p>而我并不是整个<code>webroot</code>都不能访问，其他所有的文件夹都可以访问，就是目录<code>javascript</code>文件夹没有权限访问，我的设置是<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;Directory /home/hfx/workspace/&gt;</span></div><div class="line">       <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</div><div class="line"><span class="comment">#       AllowOverride None</span></div><div class="line">       <span class="attribute">AllowOverride</span> <span class="literal">All</span></div><div class="line">       <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"><span class="section">&lt;/Directory&gt;</span></div></pre></td></tr></table></figure></p>
+<p>所以按理来说也是没有问题的，可以单单就是<code>javascript</code>目录无法访问，并且我尝试重新给<code>javascript</code>目录设置权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 777 -R javascript</div></pre></td></tr></table></figure></p>
+<p>然而还是并没有什么卵用，于是我尝试更改<code>javascript</code>变成<code>javaScript</code>或者新建其他的名字的文件夹，而它们均可以正常访问，所以猜想症结应该是那里的配置禁止了web根路径下名字为<code>javascript</code>的路径。</p>
+<h4 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h4><p>于是我看apache的所有配置文件，打开<code>/etc/apache2/conf-enable/</code>目录，发现了一个名为<code>javascript-common.conf</code>的配置文件，打开一看<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Alias /javascript <span class="meta-keyword">/usr/</span>share<span class="meta-keyword">/javascript/</span></div><div class="line"></div><div class="line"><span class="params">&lt;Directory "/usr/share/javascript/"&gt;</span></div><div class="line">       Options FollowSymLinks MultiViews</div><div class="line"><span class="params">&lt;/Directory&gt;</span></div></pre></td></tr></table></figure></p>
+<p>其实我并不知道具体是什么意思，可是从字面意思大概看出，配置里面指定了一个别名<code>/javascript</code>到目录<code>/usr/share/javascript/</code>，应该访问<code>/javascript</code>就变成了访问目录<code>/usr/share/javascript/</code>而不是我们在web根目录下创建的<code>javascript</code>目录。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>于是google一下<code>javascript-common.conf</code>，这才发现了很多真正与此相关的问题，所以真正的解决方案有很多种，有的直接修改别名的名称为<code>/javascript-common</code>，而我觉得最好的解决方案应该是</p>
+<blockquote>
+<p>You don’t need to edit the conf file or purge the package just disable it.</p>
+<pre><code>a2disconf javascript-common
+service apache2 reload
+</code></pre><p>If for some reason you want to use that conf:</p>
+<pre><code>a2enconf javascript-common
+service apache2 reload
+</code></pre></blockquote>
+<p>另外解释一下<code>a2disconf</code>和<code>a2enconf</code>的作用，官方的介绍是</p>
+<blockquote>
+<p>a2enconf, a2disconf - enable or disable an apache2 configuration file</p>
+</blockquote>
+<p>从介绍就直接明了它的作用了。快捷的启用或者禁用一个apache模块。</p>
+<p>另外还有类似的几个命令：</p>
+<ul>
+<li>apache2ctl - Apache HTTP server control interface</li>
+<li>a2enmod, a2dismod - enable or disable an apache2 module</li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="http://stackoverflow.com/questions/21706067/apache-doesnt-serve-files-in-javascript-directory-why" target="_blank" rel="external">Apache doesn’t serve files in “javascript” directory. Why?</a></li>
+<li><a href="http://manpages.ubuntu.com/manpages/trusty/man8/a2enconf.8.html" target="_blank" rel="external">a2enconf</a></li>
+<li><a href="http://manpages.ubuntu.com/manpages/trusty/man8/apache2ctl.8.html" target="_blank" rel="external">apache2ctl</a></li>
+<li><a href="http://manpages.ubuntu.com/manpages/trusty/man8/a2dismod.8.html" target="_blank" rel="external">a2dismod</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h4&gt;&lt;p&gt;今天调试一个项目，项目放在&lt;code&gt;webroot&lt;/code&gt;下面的&lt;code&gt;javascript&lt;/code&gt;目录，无论怎么设置都是&lt;code&gt;403 You don&amp;#39;t have permission to access /javascript/ on this server.&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日常笔记" scheme="http://www.hfxblog.com/categories/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Ubuntu" scheme="http://www.hfxblog.com/tags/Ubuntu/"/>
+    
+      <category term="Apache2.4" scheme="http://www.hfxblog.com/tags/Apache2-4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu 16.04安装PHP7</title>
+    <link href="http://www.hfxblog.com/2016/07/16/16-04%E5%AE%89%E8%A3%85PHP7/"/>
+    <id>http://www.hfxblog.com/2016/07/16/16-04安装PHP7/</id>
+    <published>2016-07-16T08:23:55.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于换了硬盘重装了（升级）系统到Ubuntu16.04之后，开发环境也要重新安装，其实16.04源里面默认的PHP版本就是7.x，但是有个问题就是没有OCI扩展，有项目需要使用到Oracle数据库。<br><a id="more"></a></p>
+<h3 id="准备编译环境"><a href="#准备编译环境" class="headerlink" title="准备编译环境"></a>准备编译环境</h3><p>由于全部编译太过于繁琐，而且很多依赖会有问题，所以我们选择另外一种方案，能使用<code>apt-get</code>安装都使用<code>apt-get</code>安装。不能使用apt-get才自己编译，这样可以节省大量的时间。因为有的依赖真的是很头疼。</p>
+<p>由于在Ubuntu16.04上，默认的PHP版本就是7.x。由于我们要使用Apache2.4+PHP，所以安装如下模块即可直接解析PHP。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install php-dev libapache2-mod-php</div></pre></td></tr></table></figure></p>
+<p>这样最基本的模块就安装好了，如果还需要其他的模块，可以通过<code>apt-get</code>快捷安装；比如还需要MySQL和mb_string相关的模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install php-mysql php-mbstring</div></pre></td></tr></table></figure></p>
+<p>这样就会自动安装好相关的模块。</p>
+<h3 id="安装Oracle-Client"><a href="#安装Oracle-Client" class="headerlink" title="安装Oracle Client"></a>安装Oracle Client</h3><p>由于要编译OCI扩展，我们需要Oracle客户端，这里我们下载<a href="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html" target="_blank" rel="external">Oracle Instant Client</a>，选择Instant Client for Linux x86-64 basic版本下载。</p>
+<p>另外要编译OCI必须还需要instant client SDK 包，下载解压之后合并到Base。</p>
+<p>给出的网页最后面也有安装步骤，这里简述一下</p>
+<ol>
+<li>解压zip包，放置到某个目录下</li>
+<li>为当前版本的Instant Client创建合适的链接</li>
+<li>设置环境变量</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo unzip instantclient-basic-linux.x64-12.1.0.2.0.zip</div><div class="line">sudo unzip instantclient-sdk-linux.x64-12.1.0.2.0.zip</div><div class="line">sudo mv instantclient_12_1/ /opt/oracle/</div><div class="line"><span class="built_in">cd</span> /opt/oracle/instantclient_12_1/</div><div class="line"></div><div class="line"><span class="comment"># 建立符号链接</span></div><div class="line">sudo ln <span class="_">-s</span> libclntsh.so.12.1 libclntsh.so</div><div class="line">sudo ln <span class="_">-s</span> libocci.so.12.1 libocci.so</div><div class="line"></div><div class="line"><span class="comment"># 打开 /etc/profile 在最后面加入</span></div><div class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1:<span class="variable">$LD_LIBRARY_PATH</span></div><div class="line"><span class="built_in">export</span> PATH=/opt/oracle/instantclient_12_1:<span class="variable">$PATH</span></div><div class="line"></div><div class="line"><span class="comment"># 最后source一下，使配置生效</span></div><div class="line"><span class="built_in">source</span> /etc/profile</div></pre></td></tr></table></figure>
+<h3 id="下载PHP源码"><a href="#下载PHP源码" class="headerlink" title="下载PHP源码"></a>下载PHP源码</h3><p>首先我们要确定已经安装的PHP的版本，由于使用<code>apt-get</code>安装，版本可能不是PHP官网放的最新的版本，使用下面的 命令既可查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -v</div></pre></td></tr></table></figure></p>
+<p>发现我的安装的版本是<code>7.0.4</code>，那么我们对应的下载PHP-7.0.4版本的源码。<br>两种方式可以下载到源码。</p>
+<ul>
+<li>从官网下载源码包</li>
+<li>从GitHub 仓库 <code>clone</code></li>
+</ul>
+<p>官网下载源码很简单，打开<a href="http://php.net/downloads.php" target="_blank" rel="external">php.net</a>的Download页面，选择要下载的版本。或者从GitHub仓库<code>clone</code>指定版本（或者先<code>clone</code>再<code>checkout</code>想要的版本），如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> -b PHP-7.0.4 https://github.com/php/php-src &amp;&amp; <span class="built_in">cd</span> php-src</div></pre></td></tr></table></figure>
+<h3 id="编译OCI8-PDO-OCI"><a href="#编译OCI8-PDO-OCI" class="headerlink" title="编译OCI8/PDO_OCI"></a>编译OCI8/PDO_OCI</h3><p>经过如上的步骤我们已经进入到下载的PHP源码根目录了，那么我们开始编译。</p>
+<h4 id="编译oci8"><a href="#编译oci8" class="headerlink" title="编译oci8"></a>编译oci8</h4><p>进入到扩展oci8的源码目录，使用phpize</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ext/oci8</div><div class="line">phpize</div><div class="line">./configure --with-oci8=instantclient,/opt/oracle/instantclient_12_1</div><div class="line">sudo make</div></pre></td></tr></table></figure>
+<p>执行完上面的步骤，应该会生成一个<code>modules</code>文件夹，里面就有我们想要的extension。</p>
+<h4 id="编译pdo-oci"><a href="#编译pdo-oci" class="headerlink" title="编译pdo_oci"></a>编译pdo_oci</h4><p>步骤和编译oci8是一样的，但是configure参数不一样，所以还是写一下。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ../../ext/pdo_oci</div><div class="line">phpize</div><div class="line"><span class="comment"># 最后面要指定版本号</span></div><div class="line">./configure --with-pdo-oci=instantclient,/opt/oracle/instantclient_12_1,12.1</div><div class="line">sudo make</div></pre></td></tr></table></figure></p>
+<p>结果也和上面一样。</p>
+<h4 id="使用我们编译的扩展"><a href="#使用我们编译的扩展" class="headerlink" title="使用我们编译的扩展"></a>使用我们编译的扩展</h4><p>首先我们要知道现行PHP的ext目录在哪里<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -i | grep <span class="string">"extension_dir"</span></div></pre></td></tr></table></figure></p>
+<p>我这里显示的是<code>extension_dir =&gt; /usr/lib/php/20151012 =&gt; /usr/lib/php/20151012</code>，那么我们先把我们编译的扩展复制到<code>/usr/lib/php/20151012</code>下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先进入对应的modules目录下</span></div><div class="line">cp oci8.so /usr/lib/php/20151012</div><div class="line">cp pdo_oci.so /usr/lib/php/20151012</div></pre></td></tr></table></figure></p>
+<p>然后我们还要在<code>php.ini</code>中添加相关配置项，首先也要知道php.ini的位置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p -i | grep <span class="string">"Configuration File"</span></div></pre></td></tr></table></figure></p>
+<p>打印出了如下信息</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Configuration <span class="keyword">File</span> (php.ini) Path =&gt; <span class="regexp">/etc/</span>php<span class="regexp">/7.0/</span>cli</div><div class="line">Loaded Configuration <span class="keyword">File</span> =&gt; <span class="regexp">/etc/</span>php<span class="regexp">/7.0/</span>cli<span class="regexp">/php.ini</span></div></pre></td></tr></table></figure>
+<p>这样我们就知道了php.ini的位置，但是这个是CLI（命令行接口）的配置文件，我们需要使用Apache的（CGI）。我们到目录<code>/etc/php/7.0/</code>下发现还有一个名为<code>apache2</code>的目录，里面也有php.ini文件，那么我们编辑<code>apache2</code>目录下的php.ini</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">vim</span> <span class="selector-tag">php</span><span class="selector-class">.ini</span></div></pre></td></tr></table></figure>
+<p>在里面加入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">extension=oci8.so</div><div class="line">extension=pdo_oci.so</div></pre></td></tr></table></figure>
+<p>最后重启Apache<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl restart apache2.service</div></pre></td></tr></table></figure></p>
+<p>查看一下<code>phpinfo()</code>发现OCI和PDO_OCI均已安装。到这里安装已经全部完成了。</p>
+<h3 id="Linux小技巧"><a href="#Linux小技巧" class="headerlink" title="Linux小技巧"></a>Linux小技巧</h3><p>在安装和查资料的过程中发现了一下很实用的命令，也把它们记录下来。<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 重启某个服务</span></div><div class="line">sudo systemctl restart apache2.service</div><div class="line"></div><div class="line"><span class="meta"># 查看某个服务的状态</span></div><div class="line">sudo systemctl status apache2.service</div><div class="line"></div><div class="line"><span class="meta"># 查看php相关的模块（其他的类似）</span></div><div class="line">apt-cache search php- | less</div><div class="line"></div><div class="line"><span class="meta"># 具体查看某个模块的详细信息</span></div><div class="line">apt-cache show package_name</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于换了硬盘重装了（升级）系统到Ubuntu16.04之后，开发环境也要重新安装，其实16.04源里面默认的PHP版本就是7.x，但是有个问题就是没有OCI扩展，有项目需要使用到Oracle数据库。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="日常笔记" scheme="http://www.hfxblog.com/categories/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Ubuntu" scheme="http://www.hfxblog.com/tags/Ubuntu/"/>
+    
+      <category term="PHP7" scheme="http://www.hfxblog.com/tags/PHP7/"/>
+    
+      <category term="OCI" scheme="http://www.hfxblog.com/tags/OCI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>电脑升级SSD记</title>
+    <link href="http://www.hfxblog.com/2016/07/07/%E5%85%AC%E5%8F%B8%E7%94%B5%E8%84%91%E5%8D%87%E7%BA%A7SSD%E8%AE%B0/"/>
+    <id>http://www.hfxblog.com/2016/07/07/公司电脑升级SSD记/</id>
+    <published>2016-07-07T15:19:34.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于电脑使用的机械硬盘，太卡，所以想办法提升开发体验。电脑的CPU不算差，内存单条8G也还OK。</p>
+<p>先去京东买个很便宜的240G的ADATA SSD。头天晚上下单，第二天早上上班就送到了。京东大城市的速度是毋庸置疑的。</p>
+<p>硬件安装方面换硬盘是相当简单的，我是直接将原来的硬盘取下来不用了；安装过程很简单，不赘诉。<br><a id="more"></a></p>
+<h3 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h3><ul>
+<li>准备一个4G U盘</li>
+<li>去官网下载Ubuntu 16.04</li>
+<li>一个可用的windows + 安装盘制作软件</li>
+</ul>
+<p>这里有个坑，开始用百度搜索出来的16.04的安装教程，推荐使用的制作软件是 Universal USB Installer，然而我制作了不下于5次，都无法正常启动。最终还是使用老牌的Ultraiso，制作过程网上一大把，大致说一下制作流程。</p>
+<blockquote>
+<p>菜单-&gt;文件-&gt;打开下载好的系统-&gt;菜单-&gt;启动-&gt;写入硬盘映像-&gt;选好你的U盘 然后等待制作完成即可</p>
+</blockquote>
+<p>将制作好的U盘插入到电脑，然后启动的时候注意选择启动项为制作的U盘，具体怎么选择启动项不同的电脑不一样，对了，别忘了在BIOS里面开启ACHI。DELL的电脑一般是F12选择启动项。</p>
+<p>启动之后选择install ubuntu 或者 try ubuntu然后安装，安装过程基本上都是下一步，然后等待。</p>
+<p>关于磁盘怎么选择分区这些问题，这里一概默认设置，因为240G并不大，而且我是准备只安装Ubuntu的，所以不考虑其他因素。用户名密码什么的安装步骤设置即可。</p>
+<p>需要注意的是，先选择语言的时候可以不着急选中文（选中文也可以）因为选中文会导致系统菜单的：桌面/下载等目录都是汉字的，到时在命令行的时候会很不好使。等到系统内部在修改语言即可，后面会说到。</p>
+<p>安装完成之后，输入密码即可进入到系统了，SSD速度果然不俗！！！秒进！！！</p>
+<h3 id="基础的设置"><a href="#基础的设置" class="headerlink" title="基础的设置"></a>基础的设置</h3><h4 id="更新软件源"><a href="#更新软件源" class="headerlink" title="更新软件源"></a>更新软件源</h4><p>第一步就是把更新的源给更换了！因为涉及到后面安装软件的速度和依赖问题。</p>
+<blockquote>
+<p>系统设置-&gt;软件和更新-&gt;下拉里选择其他-&gt;自动选择最好的</p>
+</blockquote>
+<h4 id="安装WizNote记录这一切"><a href="#安装WizNote记录这一切" class="headerlink" title="安装WizNote记录这一切"></a>安装WizNote记录这一切</h4><p>搜索为知笔记，找到官网，下载Linux版本。<a href="http://www.wiz.cn/wiznote-linux.html" target="_blank" rel="external">为知笔记</a>，安装官方的安装方法安装即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:wiznote-team</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install wiznote</div></pre></td></tr></table></figure>
+<p>我开始安装还是遇到了问题，说是有个依赖找不到（因为那个时候我还没有切换源，切换之后再安装就正常了）</p>
+<h4 id="安装搜狗输入法"><a href="#安装搜狗输入法" class="headerlink" title="安装搜狗输入法"></a>安装搜狗输入法</h4><p>安装完了为知笔记，发现没有输入法。那怎么写笔记呢？（英语太烂写不了）</p>
+<blockquote>
+<p>如果开始是选择英文安装的，安装输入法之前应该要先把系统语言切换成中文。因为系统语言为中文的时候，会自动安装iBus和Fcitx（搜狗需要Fcitx），另外还有各种中文字体文件。<br>系统设置-&gt;语言支持（如果此时告诉你语言包不全，要记得让它自动安装）-&gt;然后把中文从最底下拉上来到第一位<br>然后点应用到整个系统，可能需要注销或者重启才能看到效果，那么我们先注销或者重启一下。这里会提示你要不要把文件夹切换成中文，选择不要切换并且不再提示。如果开始选择中文安装的也想把文件夹名字换成英文，此时应该也会提示你切换文件夹，那么你应该切换，然后注销之后再把语言改回来，这次就不要切换即可。</p>
+</blockquote>
+<p>去搜狗官网下载<a href="http://pinyin.sogou.com/linux/help.php" target="_blank" rel="external">搜狗输入法</a>，按照安装文档安装（就是双击让软件中心自己安装），然后把输入法切换为Fcitx注销之后，就可以选择搜狗了。对了搜狗还有好看的输入法皮肤！！！</p>
+<h4 id="Google-Chrome浏览器"><a href="#Google-Chrome浏览器" class="headerlink" title="Google Chrome浏览器"></a>Google Chrome浏览器</h4><p>作为Web开发者，Chrome是必不可少的。还有一点就是Chrome内建Flash，可以看某些视频网站。当然，一提到Google，请自备梯子！！！我是有买VPN账号的，当然也可以使用xx-net使用方法可能会比较复杂，可以去GitHub仓库看。</p>
+<p>一般安装Chrome有好几种方法，可以使用第三方源，也可以使用Google提供的DEB包，这个自行选择，我选择使用去官方下载DEB安装包。<a href="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" target="_blank" rel="external">Chrome</a> 直接双击使用软件中心安装即可。</p>
+<p>安装完成之后一般要进行一些设置，使用Chrome的好处就是账号同步功能了，我只要把账号登陆（自备梯子），所有的设置和插件都回来了。</p>
+<h3 id="开发环境的再次搭建"><a href="#开发环境的再次搭建" class="headerlink" title="开发环境的再次搭建"></a>开发环境的再次搭建</h3><h4 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h4><p>由于开发使用的IDE都是Java系列的（JetBrains/Eclipse），有些部分也会使用Java做开发。<br>去Oracle下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">JDK1.8</a>最新版，进行安装。我把JDK放在<code>/opt/oracle/</code>目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 解压</span></div><div class="line">tar -zxvf jdk-8u91-linux-x64.tar.gz</div><div class="line">sudo mv jdk1.8.0_91/ /opt/oracle/jdk</div><div class="line"></div><div class="line"><span class="comment"># 设置环境变量（全局）</span></div><div class="line">sudo vim /etc/profile</div><div class="line"></div><div class="line"><span class="comment"># 在文件的最后面加入如下语句，然后保存</span></div><div class="line"><span class="built_in">export</span> JAVA_HOME=/opt/oracle/jdk</div><div class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JAVA_HOME</span>/jre/bin</div><div class="line"></div><div class="line"><span class="comment"># 然后source一下profile文件，使设置生效</span></div><div class="line">sudo <span class="built_in">source</span> /etc/profile</div><div class="line"></div><div class="line"><span class="comment"># 测试Java是否安装成功</span></div><div class="line">java -version</div><div class="line"><span class="comment"># 出现版本号则表明安装JDK已经成功了</span></div></pre></td></tr></table></figure>
+<h4 id="安装各种IDE"><a href="#安装各种IDE" class="headerlink" title="安装各种IDE"></a>安装各种IDE</h4><p>示例安装PhpStorm，其他的类似</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># PhpStorm</span></div><div class="line">sudo tar -zxvf PhpStorm-2016.1.2.tar.gz -C /opt/jetbrains/</div><div class="line"></div><div class="line"><span class="comment"># 到/opt/jetbrains/目录下改名字</span></div><div class="line">sudo mv PhpStorm-145.1616.3/ phpstorm</div><div class="line"></div><div class="line"><span class="comment"># 进入bin目录，执行IDE</span></div><div class="line"><span class="built_in">cd</span> /opt/jetbrains/phpstorm/bin</div><div class="line">./phpstorm.sh</div></pre></td></tr></table></figure>
+<p>另外一个小技巧，如果想让这些常用的IDE固定载导航栏（启动器）上，在第一次执行<code>./phpstorm.sh</code>之后，导航栏会出现一个图标，右键选择锁定到启动器即可。</p>
+<h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>由于有些项目，和自己的BLOG都是需要Node.js和NPM的，推荐使用<code>nvm</code>来安装，直接上GitHub上搜索nvm按照文档安装即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash</div><div class="line"></div><div class="line"><span class="comment"># source 一下.bashrc</span></div><div class="line"><span class="built_in">source</span> ~/.bashrc</div><div class="line"></div><div class="line"><span class="comment"># 查看Node.js的版本，选择安装一个</span></div><div class="line">nvm ls-remote</div><div class="line"></div><div class="line"><span class="comment"># 比如我选择安装了5.12.0</span></div><div class="line">nvm install v5.12.0</div></pre></td></tr></table></figure></p>
+<h4 id="安装Apache2-4"><a href="#安装Apache2-4" class="headerlink" title="安装Apache2.4"></a>安装Apache2.4</h4><p>依然使用apt安装，安装之后直接范围<code>http://localhost</code>应该就可以看到欢迎界面。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install a</div></pre></td></tr></table></figure></p>
+<h4 id="安装PHP7"><a href="#安装PHP7" class="headerlink" title="安装PHP7"></a>安装PHP7</h4><p>16.04源里面自带的就是PHP7</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install php php7.0-mysql php7.0-tidy php7.0-curl php7.0-mbstring</div></pre></td></tr></table></figure>
+<h4 id="安装MySQL-和-MySQL-Work-Branch"><a href="#安装MySQL-和-MySQL-Work-Branch" class="headerlink" title="安装MySQL 和 MySQL Work Branch"></a>安装MySQL 和 MySQL Work Branch</h4><p>直接使用apt安装，安装MySQL途中要设置root密码，设置一个既可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mysql-server mysql-workbench</div></pre></td></tr></table></figure></p>
+<h4 id="安装GIT"><a href="#安装GIT" class="headerlink" title="安装GIT"></a>安装GIT</h4><p>直接时使用APT安装，安装完成之后直接配置全局信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name hfx</div><div class="line">git config --global user.email jssmith883@gamil.com</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于电脑使用的机械硬盘，太卡，所以想办法提升开发体验。电脑的CPU不算差，内存单条8G也还OK。&lt;/p&gt;
+&lt;p&gt;先去京东买个很便宜的240G的ADATA SSD。头天晚上下单，第二天早上上班就送到了。京东大城市的速度是毋庸置疑的。&lt;/p&gt;
+&lt;p&gt;硬件安装方面换硬盘是相当简单的，我是直接将原来的硬盘取下来不用了；安装过程很简单，不赘诉。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="日常笔记" scheme="http://www.hfxblog.com/categories/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Ubuntu" scheme="http://www.hfxblog.com/tags/Ubuntu/"/>
+    
+      <category term="SSD" scheme="http://www.hfxblog.com/tags/SSD/"/>
+    
+      <category term="折腾" scheme="http://www.hfxblog.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Slim源码阅读（立个Flag）</title>
+    <link href="http://www.hfxblog.com/2016/06/29/Slim%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://www.hfxblog.com/2016/06/29/Slim源码阅读/</id>
+    <published>2016-06-29T09:42:55.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>准备阅读Slim源代码，先立各Flag看看自己能不能看下去，最近一件完整的事情都没做完，各种半途而废，各种不完美！</p>
+<a id="more"></a>
+<p>相关技术：</p>
+<ul>
+<li>PHP autoloader</li>
+<li>PHP Namespace</li>
+<li>composer</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;准备阅读Slim源代码，先立各Flag看看自己能不能看下去，最近一件完整的事情都没做完，各种半途而废，各种不完美！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="立FLAG" scheme="http://www.hfxblog.com/categories/%E7%AB%8BFLAG/"/>
+    
+    
+      <category term="PHP" scheme="http://www.hfxblog.com/tags/PHP/"/>
+    
+      <category term="RESTful" scheme="http://www.hfxblog.com/tags/RESTful/"/>
+    
+      <category term="Slim" scheme="http://www.hfxblog.com/tags/Slim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>晚睡</title>
+    <link href="http://www.hfxblog.com/2016/06/27/%E6%99%9A%E7%9D%A1/"/>
+    <id>http://www.hfxblog.com/2016/06/27/晚睡/</id>
+    <published>2016-06-27T14:37:47.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>晚睡，是没有勇气结束这一天；赖床，是没有勇气开始这一天。</p>
+</blockquote>
+<p><img src="http://7d9jd9.com1.z0.glb.clouddn.com/wanshui.jpg" alt=""></p>
+<p>每天晚睡挤出来的时间，其实第二天都是要还回去的。或许头一天多挤出几个小时活动，可能换来第二天一整天的昏昏沉沉，长期以往，恶性循环！<br><a id="more"></a></p>
+<p>每天凌晨2点之后睡，然而并不是在做什么有意义的事，只是无聊的看社交软件，就是不想睡，总觉得这一天还有很多事没有做。</p>
+<p>每次想写点什么，却发现胸无点墨！毕业2年了，好似无任何成就。</p>
+<p>白天感觉厌恶工作，晚上睡不着，对任何事情都提不起兴趣。</p>
+<p>其实大神，其实也并没有和我们不一样，别人只是把某件事坚持的做下去了而已。</p>
+<p>每每看到穿衣显瘦，脱衣有肉的人，其实别人只是每天坚持锻炼而已。</p>
+<p>每个人一天都是24小时；都是1440分钟；都是86400秒。为什么有的人碌碌无为，有的人分秒千金。</p>
+<p>或许会说，别人天赋异禀、别人天生丽质；我努力了只能这样了，别人厉害是因为天赋。其实这个世界上99%的人都所做的努力都还没有到达需要拼天赋的程度。</p>
+<p>努力变的优秀！</p>
+<p>努力将优秀变为习惯！</p>
+<p>或许就成功了呢！</p>
+<p><strong><em>所以现在就开始吧！</em></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;晚睡，是没有勇气结束这一天；赖床，是没有勇气开始这一天。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://7d9jd9.com1.z0.glb.clouddn.com/wanshui.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;每天晚睡挤出来的时间，其实第二天都是要还回去的。或许头一天多挤出几个小时活动，可能换来第二天一整天的昏昏沉沉，长期以往，恶性循环！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="发牢骚" scheme="http://www.hfxblog.com/categories/%E5%8F%91%E7%89%A2%E9%AA%9A/"/>
+    
+    
+      <category term="感悟" scheme="http://www.hfxblog.com/tags/%E6%84%9F%E6%82%9F/"/>
+    
+      <category term="吐槽自己" scheme="http://www.hfxblog.com/tags/%E5%90%90%E6%A7%BD%E8%87%AA%E5%B7%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自行修改Hexo主题</title>
+    <link href="http://www.hfxblog.com/2016/06/21/%E8%87%AA%E8%A1%8C%E4%BF%AE%E6%94%B9Hexo%E4%B8%BB%E9%A2%98/"/>
+    <id>http://www.hfxblog.com/2016/06/21/自行修改Hexo主题/</id>
+    <published>2016-06-21T15:46:45.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>折腾一下导航栏，相信很多用Hexo搭建博客的小伙伴们都使用了Apollo主题，这个主题配色简单大方，甚是喜爱。可是默认导航栏的样子是这样的<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-org-nav.png" alt="Apollo默认导航栏" title="默认导航栏的样子"><br>生命在于折腾，如何自定义导航栏呢？于是抽时间折腾了一下，变成了下面这样：<br><img src="http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-nav-result.png" alt="修改之后的导航栏" title="修改之后的样子"><br>记录一下如何折腾的，如果有遇到同样困难的小朋友或许可以参考一下<br><a id="more"></a></p>
+<h4 id="1-删除主题子模块"><a href="#1-删除主题子模块" class="headerlink" title="1. 删除主题子模块"></a>1. 删除主题子模块</h4><p>先说一下博客项目的结构</p>
+<ul>
+<li>博客托管在<a href="https://coding.net" target="_blank" rel="external">Coding</a>的，使用<code>hexo generate</code>之后的静态文件是放在<code>coding-pages</code>分支</li>
+<li>而博客的项目源文件我是直接保存在<code>master</code>分支的</li>
+</ul>
+<p>每次使用markdown写完文章，将源文件推送到<code>master</code>，然后将生成的静态页面发布到<code>coding-pages</code>。</p>
+<p>如果按照<a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank" rel="external">Apollo</a>主题官方的安装方式，使用<code>git clone</code>到<code>theme</code>文件夹，那么主题是一个匿名子模块（submodule）的方式存在于项目中的。如果是这样，我们修改主题文件会遇到问题，推送到<code>master</code>分支的文件是不包含子模块改动的，如果换一台电脑，<code>git clone/pull</code>下来的文件是不会包含主题改动的。保持子模块的好处是，如果Apollo主题的作者有更新主题，我们可以直接<code>cd</code>到子模块目录使用<code>git pull</code>更新即可。可是现在我们修改主题，那么我们则不再关注原主题是否更新了，所以要先删除主题作为子模块的存在，然后将修改的主题文件直接纳入博客项目源码的管理。删除子模块，在博客项目的根目录，执行如下代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm --cached themes/apollo</div></pre></td></tr></table></figure></p>
+<p>再将主题目录下的文件add到git提交即可。</p>
+<h4 id="2-修改主题配置文件"><a href="#2-修改主题配置文件" class="headerlink" title="2. 修改主题配置文件"></a>2. 修改主题配置文件</h4><p>找到apollo文件夹下的<code>_config.yml</code>文件，打开之后默认的目录数据结构是不满足我们修改要求的<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">    Blog:</span> /</div><div class="line"><span class="attr">    Archive:</span> /archives/</div><div class="line"><span class="attr">    Weibo:</span> http://weibo.com/sunchongsheng</div><div class="line"><span class="attr">    GitHub:</span> https://github.com/pinggod</div><div class="line"><span class="attr">    Rss:</span> /atom.xml</div></pre></td></tr></table></figure></p>
+<p>因为我们要为每个栏目配上图标。</p>
+<p>但是发现这个<code>*.yml</code>有是个什么鬼文件？查一查发现，又有人发明了一个轮子叫<a href="https://zh.wikipedia.org/wiki/YAML" target="_blank" rel="external">YAML</a>。经查阅得知，YAML其实是包含JSON的，JSON是属于YAML的一个子集，意思就是我们可以直接写JSON格式；但是为了尊重这个轮子，我们还是用它新创建的语法更新一下我们的菜单结构<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  - name:</span> Blog</div><div class="line"><span class="attr">    path:</span> /</div><div class="line"><span class="attr">    icon:</span> fa fa-home</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> Archive</div><div class="line"><span class="attr">    path:</span> /archives/</div><div class="line"><span class="attr">    icon:</span> fa fa-folder-open-o</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> Weibo</div><div class="line"><span class="attr">    path:</span> http://weibo.com/fengxianhe</div><div class="line"><span class="attr">    icon:</span> fa fa-weibo</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> GitHub</div><div class="line"><span class="attr">    path:</span> https://github.com/hefengxian</div><div class="line"><span class="attr">    icon:</span> fa fa-github-alt</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> Coding</div><div class="line"><span class="attr">    path:</span> https://coding.net/u/hfx</div><div class="line"><span class="attr">    icon:</span> iconfont coding</div><div class="line"></div><div class="line"><span class="attr">  - name:</span> About</div><div class="line"><span class="attr">    path:</span> /about/</div><div class="line"><span class="attr">    icon:</span> fa fa-info-circle</div></pre></td></tr></table></figure></p>
+<p>代码的意思大致就是一个包含多个对象的数组，其中<code>name</code>表示要菜单要显示的文字，<code>path</code>表示url路径，<code>icon</code>表示我们要使用的图标（Font Awesome 格式）。这样更新之后去看下结果，肯定是菜单都不见了，因为我们改了数据结构。</p>
+<h4 id="3-修改其他相关模板文件"><a href="#3-修改其他相关模板文件" class="headerlink" title="3. 修改其他相关模板文件"></a>3. 修改其他相关模板文件</h4><p>Apollo使用的是JADE，但是我并不懂JADE，但是看看<code>themes/apollo/layout/partial/nav.jade</code>的代码，虽然没接触过，但是凭借对其他编程语言的理解大致可以猜出语法，那么我们做一下改动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ul.nav.nav-list</div><div class="line">    each value, key in theme.menu</div><div class="line">        li.nav-list-item</div><div class="line">            - var re = /^(http|https):\/\/*/gi;</div><div class="line">            - var tar = re.test(value.path) ? &quot;_blank&quot; : &quot;_self&quot;</div><div class="line">            a.nav-list-link(class=&#123;active: is_home() &amp;&amp; value.path === &quot;/&quot;&#125; href=value.path target=tar)</div><div class="line">                i(class=value.icon) &amp;nbsp;</div><div class="line">                != value.name</div></pre></td></tr></table></figure></p>
+<p>使用hexo生成一下文件，看一下效果，发现菜单名字有了，但是还没有图标。</p>
+<p>是因为我们还没有引入Font-Awesome相关的css文件，打开<code>themes/apollo/layout/partial/head.jade</code>，虽然还是不懂JADE是什么鬼，依葫芦画瓢，在原来的apollo.css那句后面或者前面加一句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;))</div><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;css/apollo.css&quot;))</div></pre></td></tr></table></figure></p>
+<p>在这里我用的是<a href="http://www.bootcdn.cn/" target="_blank" rel="external">bootcdn</a>的CDN。</p>
+<p>再看一下，啊，大部分可以了，但是Font-Awesome这个项目并没有Coding的图标，但是我又很喜欢Coding，想把Coding放上去，那咋整呢？</p>
+<p>以前记得淘宝好像有个字体图标的网站<a href="http://iconfont.cn/" target="_blank" rel="external">ICONFONT</a>，反正就是无意中发现的这么一个网站，往里面一搜coding，居然还真有人做了这个图标。</p>
+<p>在网站上下载图标，按照文档，将字体文件复制到<code>themes/apollo/source/fonts/</code>目录下，在网站上下载图标，按照文档，将字体文件复制到<code>themes/apollo/source/fonts/</code>目录下,我们在目录<code>themes/apollo/source/css/</code>下加入<code>iconfont.css</code>文件<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">font-face</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">"iconfont"</span>;</div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.eot?t=1466522057'</span>); <span class="comment">/* IE9*/</span></div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.eot?t=1466522057#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>), <span class="comment">/* IE6-IE8 */</span></div><div class="line">    <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.woff?t=1466522057'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>), <span class="comment">/* chrome, firefox */</span></div><div class="line">    <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.ttf?t=1466522057'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>), <span class="comment">/* chrome, firefox, opera, Safari, Android, iOS 4.2+*/</span></div><div class="line">    <span class="built_in">url</span>(<span class="string">'../fonts/iconfont.svg?t=1466522057#iconfont'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>); <span class="comment">/* iOS 4.1- */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.iconfont</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>:<span class="string">"iconfont"</span> <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">16px</span>;</div><div class="line">    <span class="attribute">font-style</span>:normal;</div><div class="line">    <span class="attribute">-webkit-font-smoothing</span>: antialiased;</div><div class="line">    <span class="attribute">-webkit-text-stroke-width</span>: <span class="number">0.2px</span>;</div><div class="line">    <span class="attribute">-moz-osx-font-smoothing</span>: grayscale;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.coding</span><span class="selector-pseudo">:before</span> &#123; <span class="attribute">content</span>: <span class="string">"\e604"</span>; &#125;</div></pre></td></tr></table></figure></p>
+<p>我们将新加css文件引入到页面，打开<code>themes/apollo/layout/partial/head.jade</code>，和前面引入Font-Awesome一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;))</div><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;css/iconfont.css&quot;))</div><div class="line">link(rel=&quot;stylesheet&quot;, href=url_for(&quot;css/apollo.css&quot;))</div></pre></td></tr></table></figure></p>
+<p>这个时候再看一下效果，发现图标已经有了，可是大小好像有问题，很小…，于是我们打开Chrome调试工具，调整<code>.iconfont</code>样式的字体大小，发现<code>20px</code>差不多，那么再次修改一下文件<code>iconfont.css</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.iconfont</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>:<span class="string">"iconfont"</span> <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">20px</span>;</div><div class="line">    <span class="attribute">font-style</span>:normal;</div><div class="line">    <span class="attribute">-webkit-font-smoothing</span>: antialiased;</div><div class="line">    <span class="attribute">-webkit-text-stroke-width</span>: <span class="number">0.2px</span>;</div><div class="line">    <span class="attribute">-moz-osx-font-smoothing</span>: grayscale;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再刷新一下，终于可以了，得到了我们想要的结果。</p>
+<p>多说一句，博客的Logo自己去找一个图片，保持格式名称一样（其实可以有其他的格式，但是自己可以去查一查favicon支持哪些格式），或者自己画一个替换<code>themes/apollo/source/favicon.png</code></p>
+<p>参考资料：</p>
+<ul>
+<li>YAML <a href="https://zh.wikipedia.org/wiki/YAML" target="_blank" rel="external">YAML维基百科</a></li>
+<li>JADE <a href="http://jade-lang.com/" target="_blank" rel="external">JADE官网</a></li>
+<li>Font-Awesome <a href="http://fontawesome.io/" target="_blank" rel="external">font-awesome</a></li>
+<li>淘宝 ICONFONT <a href="http://iconfont.cn/" target="_blank" rel="external">ICONFONT</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;折腾一下导航栏，相信很多用Hexo搭建博客的小伙伴们都使用了Apollo主题，这个主题配色简单大方，甚是喜爱。可是默认导航栏的样子是这样的&lt;br&gt;&lt;img src=&quot;http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-org-nav.png&quot; alt=&quot;Apollo默认导航栏&quot; title=&quot;默认导航栏的样子&quot;&gt;&lt;br&gt;生命在于折腾，如何自定义导航栏呢？于是抽时间折腾了一下，变成了下面这样：&lt;br&gt;&lt;img src=&quot;http://7d9jd9.com1.z0.glb.clouddn.com/2016-06-23-nav-result.png&quot; alt=&quot;修改之后的导航栏&quot; title=&quot;修改之后的样子&quot;&gt;&lt;br&gt;记录一下如何折腾的，如果有遇到同样困难的小朋友或许可以参考一下&lt;br&gt;
+    
+    </summary>
+    
+      <category term="折腾" scheme="http://www.hfxblog.com/categories/%E6%8A%98%E8%85%BE/"/>
+    
+    
+      <category term="折腾" scheme="http://www.hfxblog.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+      <category term="Hexo" scheme="http://www.hfxblog.com/tags/Hexo/"/>
+    
+      <category term="Theme" scheme="http://www.hfxblog.com/tags/Theme/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>停止完美主义</title>
+    <link href="http://www.hfxblog.com/2016/06/21/%E5%81%9C%E6%AD%A2%E5%AE%8C%E7%BE%8E%E4%B8%BB%E4%B9%89/"/>
+    <id>http://www.hfxblog.com/2016/06/21/停止完美主义/</id>
+    <published>2016-06-21T13:39:33.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>为什么一直觉得自己效率低下！因为每次都在项目中钻牛角尖。比如，为了一个小小padding样式，一个小小的动画或者切换效果，调试纠结老半天，一不小心就一个上午过去了，往往导致主要的业务逻辑无法按时完成，项目延期…</p>
+<a id="more"></a>
+<p>在实际项目中往往时间都严重不够，老板/领导/客户可能最希望是再最短的时间出结果，是不是做到最好的架构、最漂亮的界面、最完美的用户体验，大家根本就步不Care。大家关心的是项目能不能在Deadline之前交付，能不能收到钱，你能不能完成任务。</p>
+<p>或许有人会说，Steve Jobs的完美主义和偏执才成就Apple霸主地位，其实真实的是，没有那个金刚钻也揽不了那个活；那种偏执和完美不是一般人一般的公司可以消耗得起的。</p>
+<p>现实是：往往因为追求完美导致工期延误效率低下甚至项目失败，大家得到利益和效率的最大化才是核心重点。</p>
+<p>所以正确的方式应该是： <code>快速迭代</code></p>
+<p>就像画画，先画出骨架！再完善细节。</p>
+<p>项目中，应当先完成主要架构、核心流程和功能。然后发布预览版，与客户和项目经理进行确认；然后根据提出的意见和建议进行修正，迭代开发；而且好处显而易见，避免方向和架构上与实际需求之间的偏差，就算有亦可以早发现早修正，降低开发成本。</p>
+<p>完美主义可能会导致花了大量的时间和精力做出来的功能，却不是需求方想要的，这个时候纠正的成本也非常巨大。</p>
+<p>实际项目中，绝大部分时候，需求方自己其实也不知道自己需要的是什么，这个时候快速迭代的好处就显而易见了，可以进行多次的测试、反馈、修复，达到项目成功交付的目的。</p>
+<blockquote>
+<p>完美主义者有如下问题：</p>
+<ul>
+<li>在一项任务花费的时间比任务要求的时间多</li>
+<li>会选择拖延到最佳的时刻。在企业中，如果这是最完美的时刻，就代表已经太迟了。</li>
+<li>过度聚焦细节却忽略整体</li>
+</ul>
+<p>如果市场人员等待最好时机，最终将失去机会</p>
+</blockquote>
+<p><strong><em>最好的时机就是现在</em></strong></p>
+<p>所以自己一定要改掉这个毛病！！！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为什么一直觉得自己效率低下！因为每次都在项目中钻牛角尖。比如，为了一个小小padding样式，一个小小的动画或者切换效果，调试纠结老半天，一不小心就一个上午过去了，往往导致主要的业务逻辑无法按时完成，项目延期…&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="发牢骚" scheme="http://www.hfxblog.com/categories/%E5%8F%91%E7%89%A2%E9%AA%9A/"/>
+    
+    
+      <category term="感悟" scheme="http://www.hfxblog.com/tags/%E6%84%9F%E6%82%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你的精力分配决定你的层次</title>
+    <link href="http://www.hfxblog.com/2016/06/20/%E4%BD%A0%E7%9A%84%E7%B2%BE%E5%8A%9B%E5%88%86%E9%85%8D%E5%86%B3%E5%AE%9A%E4%BD%A0%E7%9A%84%E5%B1%82%E6%AC%A1/"/>
+    <id>http://www.hfxblog.com/2016/06/20/你的精力分配决定你的层次/</id>
+    <published>2016-06-20T11:45:47.000Z</published>
+    <updated>2016-08-19T02:32:48.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天由于重新布置博客的原因，看了一些自己转发的微博，看到了一个长文《你的精力分配觉得你的层次》，文章写的很好我也转发了，而我却并没有印象。结合今天看到 <a href="http://stormzhang.com/" target="_blank" rel="external">stormzhang</a> 的文章<a href="http://mp.weixin.qq.com/s?__biz=MzA4NTQwNDcyMA==&amp;mid=2650661932&amp;idx=1&amp;sn=8325f8bd782a376434a5bf69e4f38dee#rd" target="_blank" rel="external">少年，别再收藏文章了！</a>才觉得自己原来挺可笑的。</p>
+<p>看了那么多的信息：微博/空间/朋友圈/知乎，原来也只是看了就看了而已；可以总结为“过目即忘”。那我阅读那些的意义在哪里？</p>
+<a id="more"></a>
+<ul>
+<li><p>牺牲了那么多的时间，睡眠的时间，学习的时间；只是看了一些穿肠而过的文字。收藏了那么多，原来都没有去看而已</p>
+</li>
+<li><p>去年买了那么多书，其实一本都没有看，花钱了，只是买了个心安；达到骗自己的目的。</p>
+</li>
+<li><p>每天花3个小时以上在打游戏，导致坐着的时间太长，保持一个姿势不变伤害自己的身体，每天晚睡，每天起床像要命，导致工作效率极度下降。</p>
+</li>
+<li><p>暴饮暴食，体质下降，体重上升</p>
+</li>
+</ul>
+<blockquote>
+<p>经济学有一个概念，叫“机会成本”。“机会成本”是指为了得到某种东西而所要放弃另一些东西的最大价值。比方说你有100块钱，能吃一顿饭，也能看一场电影，你去看电影了你的机会成本就是一顿饭。又如你周末两天可以用来打Dota，也可以用来看《论语》，你去看《论语》了，打Dota及其快乐就是你的机会成本。</p>
+<p>换句话来说，做的事情价值的多少，是由放弃的事情反映出来的，而放弃事情，也是由做的事情反映出来的。</p>
+<p>总之什么样的人，什么样的人，价值如何的人或者事，可以从他的选择中判断出来：你放弃了做什么而选择了做什么。你的心中孰轻孰重，孰优孰劣，在你的实际行动诠释下，一切语言都是苍白无力的：你做了什么，你就是什么，值什么。</p>
+</blockquote>
+<p>如果为了一块糖和朋友大打出手，你们俩的友谊和你的好朋友就值这块糖；如果你因为电影票钱和女朋友斤斤计较导致分开，你俩的爱情和你的爱人就值这电影票钱；如果一个廉价花瓶碎了，打得孩子再也 不敢自由的玩耍，你孩子的好奇心也就值这个花瓶。</p>
+<blockquote>
+<p>每个人的时间就这么多，精力就这么少，你分给价值Low的事，为了价值Low的事来回折腾，只能说你没有对你来说没有更有价值的事情投入精力，或者干脆说你就是各价值Low的人</p>
+</blockquote>
+<p>所以每当自己在电脑前没日没夜的打游戏时，甚至为了游戏里的某些事情大发雷霆时，其实自己的价值就是值这些毫无意义的事情。如果仍然觉得薪水没有涨，工作效率还是那么底下，技术水平还是那么Low的时候，或许应该明白原因在哪里了！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天由于重新布置博客的原因，看了一些自己转发的微博，看到了一个长文《你的精力分配觉得你的层次》，文章写的很好我也转发了，而我却并没有印象。结合今天看到 &lt;a href=&quot;http://stormzhang.com/&quot;&gt;stormzhang&lt;/a&gt; 的文章&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzA4NTQwNDcyMA==&amp;amp;mid=2650661932&amp;amp;idx=1&amp;amp;sn=8325f8bd782a376434a5bf69e4f38dee#rd&quot;&gt;少年，别再收藏文章了！&lt;/a&gt;才觉得自己原来挺可笑的。&lt;/p&gt;
+&lt;p&gt;看了那么多的信息：微博/空间/朋友圈/知乎，原来也只是看了就看了而已；可以总结为“过目即忘”。那我阅读那些的意义在哪里？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="发牢骚" scheme="http://www.hfxblog.com/categories/%E5%8F%91%E7%89%A2%E9%AA%9A/"/>
+    
+    
+      <category term="感悟" scheme="http://www.hfxblog.com/tags/%E6%84%9F%E6%82%9F/"/>
+    
+      <category term="心情" scheme="http://www.hfxblog.com/tags/%E5%BF%83%E6%83%85/"/>
+    
+      <category term="作" scheme="http://www.hfxblog.com/tags/%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Blog功能测试</title>
+    <link href="http://www.hfxblog.com/2016/06/20/first-post/"/>
+    <id>http://www.hfxblog.com/2016/06/20/first-post/</id>
+    <published>2016-06-20T04:10:00.000Z</published>
+    <updated>2016-08-23T07:15:59.730Z</updated>
+    
+    <content type="html"><![CDATA[<p>做博客的功能测试：代码高亮、数学公式、文章发布等等<br><a id="more"></a></p>
+<h2 id="代码高亮测试"><a href="#代码高亮测试" class="headerlink" title="代码高亮测试"></a>代码高亮测试</h2><h3 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actions <span class="keyword">from</span> <span class="string">'./../store/actions/user-actions'</span></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> config <span class="keyword">from</span> <span class="string">'../config/config'</span></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> util <span class="keyword">from</span> <span class="string">'../api/util'</span></div><div class="line"></div><div class="line">Vue.use(Router)</div><div class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> Router()</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</div><div class="line">    data () &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            username: <span class="string">''</span>,</div><div class="line">            password: <span class="string">''</span></div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    ready() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'ready'</span>, <span class="keyword">this</span>.isLogin)</div><div class="line"></div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">        <span class="keyword">this</span>.isLogin ? router.go(<span class="string">'/home/dashboard'</span>) : router.go(<span class="string">'/signin'</span>)</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'create'</span>, <span class="keyword">this</span>.isLogin)</div><div class="line">    &#125;,</div><div class="line">    vuex: &#123;</div><div class="line">        getters: &#123;</div><div class="line">            isLogin: (&#123;auth&#125;) =&gt; &#123;</div><div class="line">                <span class="keyword">return</span> auth.isLogin</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        actions: actions</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="rm-TeX-or-rm-LaTeX"><a href="#rm-TeX-or-rm-LaTeX" class="headerlink" title="$\rm\TeX$ or $\rm\LaTeX$"></a>$\rm\TeX$ or $\rm\LaTeX$</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">When <span class="formula">$a <span class="tag">\<span class="name">ne</span></span> 0$</span>, there are two solutions to <span class="tag">\<span class="name">(</span></span>ax^2 + bx + c = 0<span class="tag">\<span class="name">)</span></span> and they are</div><div class="line"><span class="formula">$$x = &#123;-b <span class="tag">\<span class="name">pm</span></span> <span class="tag">\<span class="name">sqrt</span><span class="string">&#123;b^2-4ac&#125;</span></span> <span class="tag">\<span class="name">over</span></span> 2a&#125;.$$</span></div><div class="line"></div><div class="line"><span class="formula">$$<span class="tag">\<span class="name">frac</span><span class="string">&#123;1&#125;</span><span class="string">&#123;\Bigl(\sqrt&#123;\phi \sqrt&#123;5&#125;</span></span>&#125;-<span class="tag">\<span class="name">phi</span></span><span class="tag">\<span class="name">Bigr</span></span>) e^&#123;<span class="tag">\<span class="name">frac</span></span>25 <span class="tag">\<span class="name">pi</span></span>&#125;&#125; = 1+<span class="tag">\<span class="name">frac</span><span class="string">&#123;e^&#123;-2\pi&#125;</span></span>&#125; &#123;1+<span class="tag">\<span class="name">frac</span><span class="string">&#123;e^&#123;-4\pi&#125;</span></span>&#125; &#123;1+<span class="tag">\<span class="name">frac</span><span class="string">&#123;e^&#123;-6\pi&#125;</span></span>&#125; &#123;1+<span class="tag">\<span class="name">frac</span><span class="string">&#123;e^&#123;-8\pi&#125;</span></span>&#125; &#123;1+<span class="tag">\<span class="name">cdots</span></span>&#125; &#125; &#125; &#125;$$</span></div></pre></td></tr></table></figure>
+<h3 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">NSC</span>\<span class="title">Model</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span> <span class="keyword">extends</span> <span class="title">BaseModel</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@var</span> string $table 当前主要使用的数据表名</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> $table = <span class="string">'article_detail'</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 删除一篇文章</div><div class="line">     *</div><div class="line">     * 要先删除关联的消息，比如：ArticleTranslate中的记录</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> array $ids 支持同时删除多个记录</div><div class="line">     * <span class="doctag">@return</span> \Doctrine\DBAL\Driver\Statement|int</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">delete</span><span class="params">($ids)</span> </span>&#123;</div><div class="line">        $translate = <span class="keyword">new</span> ArticleTranslate();</div><div class="line">        $query = <span class="keyword">$this</span>-&gt;conn-&gt;createQueryBuilder();</div><div class="line"></div><div class="line">        $translate-&gt;delete($ids);</div><div class="line"></div><div class="line">        $stmt = $query-&gt;delete(<span class="keyword">$this</span>-&gt;table)</div><div class="line">            -&gt;where($query-&gt;expr()-&gt;in(<span class="string">'Article_Detail_ID'</span>, $ids))</div><div class="line">            -&gt;execute();</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $stmt;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">class</span>=<span class="string">"app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie8 no-ie10 no-ie11 no-ios"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>NSC<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/libs/fontawesome/css/font-awesome.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/libs/bootstrap/css/bootstrap.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/css/animate.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/css/font.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/css/icon.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/libs/daterangepicker/daterangepicker.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/libs/icheck/skins/all.css"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--&lt;link rel="stylesheet" href="assets/libs/umeditor/themes/default/css/umeditor.min.css"&gt;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/libs/ueditor/themes/default/css/ueditor.min.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"assets/css/app.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/jquery/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/bootstrap/js/bootstrap.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/echarts/echarts.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/moment/moment-with-locales.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/daterangepicker/daterangepicker.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/icheck/icheck.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--&lt;script src="assets/libs/umeditor/umeditor.config.js"&gt;&lt;/script&gt;</span></div><div class="line">&lt;script src="assets/libs/umeditor/umeditor.min.js"&gt;&lt;/script&gt;--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/ueditor/ueditor.config.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"assets/libs/ueditor/ueditor.all.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"dist/build.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.telegram.mtproto;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.telegram.tl.DeserializeException;</div><div class="line"><span class="keyword">import</span> org.telegram.tl.TLContext;</div><div class="line"><span class="keyword">import</span> org.telegram.tl.TLMethod;</div><div class="line"><span class="keyword">import</span> org.telegram.tl.TLObject;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelpGetNearestDc</span> <span class="keyword">extends</span> <span class="title">TLMethod</span>&lt;<span class="title">NearestDc</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CLASS_ID = <span class="number">531836966</span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> NearestDc <span class="title">deserializeResponse</span><span class="params">(InputStream stream, TLContext context)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        NearestDc response = (NearestDc) context.deserializeMessage(stream);</div><div class="line">        <span class="keyword">if</span> (response == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> DeserializeException(<span class="string">"Unable to deserialize response"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!(response <span class="keyword">instanceof</span> NearestDc)) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> DeserializeException(<span class="string">"Response has incorrect type"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.println(response);</div><div class="line">        <span class="keyword">return</span> response;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getClassId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> CLASS_ID;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 1. 插入新的权限对象</span></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> OPERATION_OBJECT</div><div class="line">(PARENT_OPERATION_OBJECT_ID, OPERATION_OBJECT_CODE, OPERATION_OBJECT_NAME, OPERATION_OBJECT_URL, OPERATION_OBJECT_TYPE)</div><div class="line">  <span class="keyword">SELECT</span></div><div class="line">    OBJECT_ID,</div><div class="line">    <span class="string">'findByName'</span> <span class="keyword">as</span> OPERATION_OBJECT_CODE,</div><div class="line">    <span class="string">'Find By Name'</span> <span class="keyword">as</span> OPERATION_OBJECT_NAME,</div><div class="line">    <span class="string">'?r=fetch/findByName'</span> <span class="keyword">as</span> OPERATION_OBJECT_URL,</div><div class="line">    <span class="string">'L'</span> <span class="keyword">as</span> OPERATION_OBJECT_TYPE</div><div class="line">  <span class="keyword">FROM</span></div><div class="line">    OPERATION_OBJECT</div><div class="line">  <span class="keyword">WHERE</span></div><div class="line">    OPERATION_OBJECT_CODE = <span class="string">'tools'</span>;</div><div class="line"><span class="keyword">COMMIT</span>;</div><div class="line"></div><div class="line"><span class="comment">-- 2. 插入权限表（需要先提交上一条记录）</span></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> PRIVILEGE</div><div class="line">(ROLE_ID, OPERATION_OBJECT_CODE, OPERATION_OBJECT_ID, CAN_BROWSE, CAN_MODIFY, CAN_ACTION, CAN_DELETE)</div><div class="line">  <span class="keyword">SELECT</span></div><div class="line">    r.ROLE_ID,</div><div class="line">    oo.OPERATION_OBJECT_CODE,</div><div class="line">    oo.OPERATION_OBJECT_ID,</div><div class="line">    <span class="number">1</span>,</div><div class="line">    <span class="number">0</span>,</div><div class="line">    <span class="number">0</span>,</div><div class="line">    <span class="number">0</span></div><div class="line">  <span class="keyword">FROM</span></div><div class="line">    <span class="keyword">ROLE</span> r, OPERATION_OBJECT oo</div><div class="line">  <span class="keyword">WHERE</span></div><div class="line">    oo.OPERATION_OBJECT_CODE = <span class="string">'findByName'</span>;</div><div class="line"><span class="keyword">COMMIT</span>;</div></pre></td></tr></table></figure>
+<h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><p>当$a \ne 0$时，$ax^2 + bx + c = 0$ 有如下两个解：<br>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>
+<p>复杂数学表达式测试</p>
+<p>$$\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;做博客的功能测试：代码高亮、数学公式、文章发布等等&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="article" scheme="http://www.hfxblog.com/tags/article/"/>
+    
+  </entry>
+  
+</feed>
