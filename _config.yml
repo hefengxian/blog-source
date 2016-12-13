@@ -78,8 +78,8 @@ archive_generator:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
 - type: git
-  repo: https://git.coding.net/hfx/hfx.git
+  repo: git@git.coding.net:hfx/hfx.git
   branch: coding-pages
 - type: git
-  repo: https://github.com/hefengxian/hefengxian.github.io.git
+  repo: git@github.com:hefengxian/hefengxian.github.io.git
 
