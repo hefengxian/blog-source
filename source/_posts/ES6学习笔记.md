@@ -271,3 +271,70 @@ ES5 的顶层对象，本身也是一个问题，因为它在各种实现里不�
 + Node 里面，顶层对象是`global`，但其他环境都不支持。
 
 ES6 中只是一个提案，不赘述。
+
+## 变量的解构赋值
+### 基本用法
+ES6允许安装一定的模式，从数组和对象中提取值，对变量进行赋值，这杯称为解构（Destructuring），以前变量赋值只能这样
+```js
+var a = 1
+var b = 2
+var c = 3
+```
+ES6 中我们可以这样写
+```js
+var [a, b, c] = [1, 2, 3]
+```
+本质上这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值；下面是一些解构赋值的例子
+```js
+let [foo, [[bar], baz]] = [1, [[2], 3]]
+console.log(foo, bar, baz)                  // 1 2 3
+
+let [,, third] = ['A', 'B', 'C']
+console.log(third)                          // C
+
+let [x, , y] = [1, 2, 3]
+console.log(x, y)                           // 1 3
+
+let [head, ...tail] = [1, 2, 3, 4, 5]
+console.log(head, tail)                     // 1 [ 2, 3, 4, 5 ]
+
+let [i, j, ...k] = ['A']
+console.log(i, j, k)                        // A undefined []
+```
+解构不成功，变量的值就会变成`undefined`；另外不完全解构，左边只是匹配右边一部分，这种情况依然是解构成功的。
+
+如果等号右边不是可遍历的结构那么解构会报错。
+```js
+let [foo1] = 1              // TypeError: undefined is not a function
+let [foo2] = false          // TypeError: undefined is not a function
+let [foo3] = NaN            // TypeError: undefined is not a function
+let [foo4] = undefined      // TypeError: undefined is not a function
+let [foo5] = null           // TypeError: undefined is not a function
+let [foo6] = {}             // TypeError: undefined is not a function
+```
+因为右边的值要么不具备Iterator接口（最后 1 个），要么就是转成对象之后不具备Iterator接口（前面 5 个）。另外解构适用于`var`、`let`、`const`。
+
+
+## [todo]字符串的扩展
+## [todo]正则的扩展
+## [todo]数值的扩展
+## [todo]数组的扩展
+## [todo]函数的扩展
+## [todo]对象的扩展
+## [todo]Symbol
+## [todo]Set和Map数据结构
+## [todo]Proxy和Reflect
+## [todo]Iterator 和 for ... of 循环
+## [todo]Generator函数
+## [todo]Promise函数
+## [todo]异步操作和Async函数
+## [todo]Class
+## [todo]Decorator
+## [todo]Module
+## [todo]编程风格
+## [todo]规则
+## [todo]二进制
+## [todo]SIMD
+
+
+
