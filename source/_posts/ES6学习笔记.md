@@ -314,6 +314,307 @@ let [foo6] = {}             // TypeError: undefined is not a function
 ```
 因为右边的值要么不具备Iterator接口（最后 1 个），要么就是转成对象之后不具备Iterator接口（前面 5 个）。另外解构适用于`var`、`let`、`const`。
 
+对于Set结构，也可以使用数组解构赋值。事实上只要某种数据具有 Iterator 接口，都可以采用数组形式的结构赋值。
+```js
+// Generator 写法
+function* fibs() {
+    let a = 0,
+        b = 1
+    while (true) {
+        yield a;                    // 不知道为啥这里一定要加分好才能生效
+        [a, b] = [b, a + b]
+    }
+}
+
+let [first, second, third, fourth, fifth, sixth, seven] = fibs()
+console.log(first, second, third, fourth, fifth, sixth, seven)
+```
+
+### 默认值
+
+结构赋值允许指定默认值
+```js
+let [a, b = 'y'] = ['x'],
+    [foo = true] = []
+
+console.log(a, b, foo);             // x y true
+
+[a, b = 'a'] = ['b', undefined]
+console.log(a, b)                   // b a
+```
+另外，ES6 内部使用严格相等运算符 `===`，所以如果不是严格等于`undefined`默认值是不会生效的。比如`null`是可以正确赋值的，默认值不会生效。
+
+如果默认值是一个表达式，那么这个表达式是惰性求职的，再用到的时候才会求值
+```js
+function f() {
+    console.log('f() is executed.')
+    return 'Hello'
+}
+
+let [a = f()] = ['World']
+console.log(a)      // World
+
+let [b = f()] = [undefined]
+console.log(b)
+// f() is executed.
+// Hello
+```
+
+默认值可以引用结构赋值的其他变量，但是被引用的变量必须已经声明
+```js
+let [x = 1, y = x] = [];     // x=1; y=1
+let [x = 1, y = x] = [2];    // x=2; y=2
+let [x = 1, y = x] = [1, 2]; // x=1; y=2
+let [x = y, y = 1] = [];     // ReferenceError
+```
+
+### 对象的结构赋值
+
+对象也可以用于对象，不同之处在于，数组必须按顺序赋值，对应的位置赋值对应的位置；而对象只需要属性名相同，就可以正确赋值。
+```js
+let {foo, bar} = {bar: 'World', foo: 'Hello'}
+console.log(foo, bar)       // Hello World
+
+let {baz} = {bar: 'World', foo: 'Hello'}
+console.log(baz)            // undefined
+```
+
+如果变量名和属性名不一致，应该写成如下这样
+```js
+let {foo: f, bar: b} = {bar: 'World', foo: 'Hello'}
+console.log(f, b)           // Hello World
+```
+
+这就说明对象解构赋值就是下面形式的简写
+```js
+let {foo: foo, bar: bar} = {bar: 'World', foo: 'Hello'}
+console.log(foo, bar)           // Hello World
+```
+也就是说，对象的结构赋值的内部机制，是先找到同名属性，然后再给对应的变量赋值，真正被赋值的是后者，而不是前者。
+```js
+let {foo: bar} = {foo: 'aaa', bar: 'bbb'}
+console.log(bar)            // aaa
+console.log(foo)            // ReferenceError: foo is not defined
+```
+
+采用这种写法的时候，变量的声明和赋值的一体的，`let` 和 `const`来说，变量不能重复声明，如果赋值的变量以前声明过，就会报错。
+```js
+let foo
+let {foo} = {foo: 1}            // Identifier 'foo' has already been declared
+
+let baz
+let {bar: baz} = {bar: 1}       // Identifier 'baz' has already been declared
+```
+`var`命令允许重复声明，则没有这个问题
+
+```js
+let foo
+({foo} = {foo: 1})      // 括号是必须的，否则{}会被认为是代码块
+console.log(foo)        // 1
+
+let baz
+({bar: baz} = {bar: 1})
+console.log(baz)        // 1
+```
+括号是必须的，否则会报错，因为解析器将会把开头的大括号理解成一个代码块。
+
+另外，和数组一样，结构也可以用于嵌套结构的对象
+```js
+let obj = {
+    p: [
+        'hello',
+        {y: 'world'}
+    ]
+}
+
+let {p: [x, {y}]} = obj
+console.log(x, y)       // hello world
+```
+注意，这时`p`是模式，不是变量，因此不会被赋值。
+
+另外对象解构也可以指定默认值，依然使用严格属性等于`undefined`来判断是否赋值；解构失败变量的值就是`undefined`
+
+如果要将一个已经声明的变量用于结构赋值，就需要加上圆括号，和上面一样，开始的大括号会被解析成代码块
+
+对象的解构赋值，可以很方便的将现有对象的方法，赋值到某个变量。
+```js
+let {log, sin, cos, pow} = Math
+console.log(log(pow(Math.E, 20)))       // 2
+console.log(sin(Math.PI / 2))           // 1
+```
+
+由于数组的 本质是特殊的对象，因此对数组进行对象属性的解构。
+```js
+let arr = [1, 2, 3]
+let {0: f, [arr.length - 1]: l} = arr
+console.log(f, l)       // 1 3
+```
+另外：方括号这种写法，属于“属性名表达式”
+
+### 字符串解构赋值
+
+字符串也可以解构赋值，字符串被转换成了一个类似数组的对象。
+```js
+let [a, b, c, d, e] = 'hello'
+console.log(a, b, c, d, e)      // h e l l o
+```
+
+数组对象还有一个`length`对象，因此还可以对象解构赋值。
+```js
+let {length: foo} = 'hello'
+console.log(foo)        // 5
+```
+
+### 数值和布尔值的解构赋值
+
+解构赋值时，如果等号右边是数值和布尔值，则会首先转换为对象。
+```js
+let {toString: s} = 123
+console.log(s === Number.prototype.toString)        // true
+console.log(s)                                      // [Function: toString]
+
+let {toString: t} = true
+console.log(t === Boolean.prototype.toString)       // true
+console.log(t)                                      // [Function: toString]
+```
+解构赋值的规则是，只要等号的右边的值不是对象，就先将其转换为对象。由于`undefined`和`null`无法转换为对象，所以对他们进行结构赋值都会报错。
+```js
+let {prop: x} = undefined       // Cannot match against 'undefined' or 'null'.
+let {prop: y} = null            // Cannot match against 'undefined' or 'null'.
+```
+
+### 函数参数的解构赋值
+函数的参数也可以使用解构赋值
+```js
+function add([x, y]) {
+    return x + y
+}
+
+console.log(add([1, 3]))                                    // 4
+console.log([[1, 2], [3, 4]].map(([x, y]) => x + y))        // [ 3, 7 ]
+```
+
+函数参数的解构也可以使用默认值。
+```js
+function move({x = 0, y = 0} = {}) {
+    return [x,  y]
+}
+
+console.log(move({x: 1, y: 2}))         // [ 1, 2 ]
+console.log(move({x: 1}))               // [ 1, 0 ]
+console.log(move({}))                   // [ 0, 0 ]
+console.log(move())                     // [ 0, 0 ]
+```
+
+另外，`undefined`就会触发默认值
+```js
+console.log([1, undefined, 3].map((x = 'YES') => x))        // [ 1, 'YES', 3 ]
+```
+
+### 用途
+变量解构赋值的用途很多
+
+#### 交换变量
+```js
+let x = 'a',
+    y = 'b';
+[x, y] = [y, x]
+console.log(x, y)       // b a
+```
+#### 函数返回多个值
+函数只能返回一个值，如果要返回多个值，只能将它们放在数组或者对象里返回，有了解构赋值，取出这些值就非常方便了。
+```js
+function fun1() {
+    return [1, 2, 3]
+}
+
+let [a, b, c] = fun1()
+console.log(a, b, c)            // 1 2 3
+
+function fun2() {
+    return {
+        foo: 'foo',
+        bar: 'bar'
+    }
+}
+let {foo, bar} = fun2()
+console.log(foo, bar)           // foo bar
+```
+
+#### 函数参数的定义
+解构赋值可以方便地将一组参数与变量名对应起来。
+```js
+// 有序参数
+function f1([x, y, z]) {
+    // ...
+}
+f1([1, 2, 3])
+
+// 无序的参数
+function f2({x, y, z}) {
+    // ...
+}
+f2({z: 1, y: 2, x: 3})
+```
+
+#### 提取JSON数据
+解构赋值对提取JSON对象中的数据，尤其有用
+```js
+let json = {
+    id: 12,
+    msg: 'Hello world!',
+    status: [100, 200]
+}
+
+let {id, msg, status} = json
+console.log(id, msg, status)        // 12 'Hello world!' [ 100, 200 ]
+```
+
+#### 函数参数的默认值
+指定参数的默认值，就避免了在函数体内部再写`var foo = config.foo || 'default foo';`这样的语句。
+```js
+jQuery.ajax = function (url, {
+    async = true,
+    beforeSend = function () {},
+    cache = true,
+    complete = function () {},
+    crossDomain = false,
+    global = true,
+    // ... more config
+}) {
+    // ... do stuff
+}
+```
+
+#### 遍历Map解构
+任何部署了 Iterator 接口的对象，都可以使用`for ... of`遍历
+```js
+let map = new Map()
+map.set('a', 'Hello')
+map.set('b', 'World')
+
+// 获取键和值
+for (let [k, v] of map) {
+    console.log(k, v)
+}
+
+// 只获取键名
+for (let [k] of map) {
+    console.log(k)
+}
+
+// 只获取值
+for (let [, v] of map) {
+    console.log(v)
+}
+```
+
+#### 输入模块指定的方法
+加载模块时，往往需要指定输入那些方法。解构赋值使得输入语句非常清晰。
+```js
+const { SourceMapConsumer, SourceNode } = require("source-map");
+```
+
 
 ## [todo]字符串的扩展
 ## [todo]正则的扩展
