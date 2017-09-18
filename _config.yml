@@ -83,3 +83,8 @@ deploy:
 - type: git
   repo: git@github.com:hefengxian/hefengxian.github.io.git
 
+
+# markdown
+marked:
+  gfm: true
+  breaks: false
