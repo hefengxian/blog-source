@@ -6,13 +6,26 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>搜索工具</title>
 
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" />
 
     <style>
         body{
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            height: 100vh;
+            background-size: cover;
+            background-image: url(stock-photo-163764491.jpg);
+            background-repeat: no-repeat;
+            background-color: transparent;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
         }
+
+        .container {
+
+        }
+
         .fa-google {
             color: #4285f4;
         }
@@ -54,14 +67,28 @@
         }
     </style>
 </head>
-<body id="app">
-<canvas></canvas>
+<body id="app" style="">
 
-<header class="site-header">
+<div class="container">
+    <div class="logo">
+        <a href="/"><img src="avatar.png" style="max-width: 64px;"></a>
+    </div>
+    <div class="search">
+        <ul class="search-option">
+            <li>google</li>
+            <li>baidu</li>
+        </ul>
+        <div>
+            <input type="text">
+        </div>
+    </div>
+</div>
+
+<!--<header class="site-header">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-xs-12">
-                <a href="/"><img src="/favicon.png" class="center-block"></a>
+                <a href="/"><img src="avatar.png" style="max-width: 64px;"></a>
                 <form action="" method="GET" target="_blank" id="search-form">
                     <div class="form-group">
                         <div class="input-group input-group-lg">
@@ -116,10 +143,8 @@
     <p class="text-muted text-center">使用 <i title="百度" class="fa fa-paw"></i> 搜索建议，默认 <i title="Google" class="fa" :class="isGoogle ? 'fa-google' : 'fa-paw'"></i>
         搜索，请自备梯子；GFW <i class="fa fa-thumbs-down"></i>
     </p>
-</footer>
+</footer>-->
 
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="//cdn.bootcss.com/vue/1.0.26/vue.min.js"></script>
 
 <script>
@@ -261,53 +286,7 @@
 </script>
 
 <script>
-    document.addEventListener('touchmove', function (e) {
-        e.preventDefault()
-    })
-    var c = document.getElementsByTagName('canvas')[0],
-            x = c.getContext('2d'),
-            pr = window.devicePixelRatio || 1,
-            w = window.innerWidth,
-            h = window.innerHeight,
-            f = 200,
-            q,
-            m = Math,
-            r = 0,
-            u = m.PI*2,
-            v = function(n) {
-                return m.sin(n)*m.sin(n)
-            },
-            z = m.random
-    c.width = w*pr
-    c.height = h*pr
-    x.scale(pr, pr)
-    x.globalAlpha = 0.6
-    function i(){
-        x.clearRect(0,0,w,h)
-        q=[{x:0,y:h*.7+f},{x:0,y:h*.7-f}]
-        while(q[1].x<w+f) d(q[0], q[1])
-    }
-    function d(i,j){
-        x.beginPath()
-        x.moveTo(i.x, i.y)
-        x.lineTo(j.x, j.y)
-        var k = j.x + (z()*2-0.25)*f,
-                n = y(j.y)
-        x.lineTo(k, n)
-        x.closePath()
-        r-=u/-50
-        x.fillStyle = '#'+(v(r)*127+128<<16 | v(r+u/3)*127+128<<8 | v(r+u/3*2)*127+128).toString(16)
-        x.fill()
-        q[0] = q[1]
-        q[1] = {x:k,y:n}
-    }
-    function y(p){
-        var t = p + (z()*2-1.1)*f
-        return (t>h||t<0) ? y(p) : t
-    }
-    document.onclick = i
-    document.ontouchstart = i
-    i()
+
 </script>
 </body>
 </html>
