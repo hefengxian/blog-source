@@ -46,11 +46,12 @@ tar -xvf php-7.2.6.tar
 
 ```bash
 sudo apt install libxml2-dev \
-    libcurl4-openssl-dev \
-    pkg-config \
-    libssl-dev \
-    libtidy-dev \
-    libxslt1-dev 
+libcurl4-openssl-dev \
+pkg-config \
+libssl-dev \
+libtidy-dev \
+libxslt1-dev \
+libreadline-dev
 ```
 
 > 可能不同的机器、启用不同的 PHP 模块需要的依赖是不一样的，可以按照抛出的错误进行安装（也可以 Google 错误再安装），缺啥装啥！
@@ -69,20 +70,31 @@ sudo apt install libxml2-dev \
 编译参数和 CLI 的会有一点点区别，后面会给出相关的解释
 
 ```bash
+# CGI 不需要线程安全
+
 ./configure --prefix=/opt/php \
---enable-mbstring \
+--enable-calendar \
 --with-curl \
---with-openssl \
---with-xmlrpc \
---enable-zip \
---with-xsl \
---with-ldap \
---with-tidy \
---enable-sockets \
---enable-maintainer-zts \
+--enable-exif \
+--enable-ftp \
+--with-gettext \
+--enable-mbstring \
 --enable-mysqlnd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
+--with-oci8=instantclient,/opt/oracle/instantclient_12_1 \
+--with-pdo-oci=instantclient,/opt/oracle/instantclient_12_1,12.1 \
+--with-openssl \
+--enable-pcntl \
+--with-readline \
+--enable-shmop \
+--enable-sockets \
+--with-tidy \
+--enable-wddx \
+--with-xsl \
+--with-xmlrpc \
+--enable-zip \
+--with-zlib \
 --with-config-file-scan-dir=/opt/php/etc \
 --with-apxs2=/usr/bin/apxs2 \
 --with-config-file-path=/opt/php/cgi \
@@ -96,6 +108,8 @@ sudo apt install libxml2-dev \
 > 需要注意的是，这里配置了的模块是不需要再在 `php.ini` 配置的，相当于把这些模块打包进了 PHP 而不是从外部加载，如果强行配置可能会导致警告说在共享模块中找不到该模块
 
 > `apxs2` 这个是 `apxs - APache eXtenSion tool` （使用 `man apxs2` 得到）可以通过 `whereis apxs2` 找到位置
+
+> 指定 `--prefix` 在 *nix 是一个好习惯，方便卸载（*nix 和 Windows 在应用方面架构的差距！）
 
 
 #### make
@@ -125,10 +139,11 @@ sudo make install
 
 一般从输出的信息中我们可以知道安装到了 `/opt/php` 下
 
+> 如果没有指定 `--prefix` ，可以在这里把输出重定向到一个文件，将来要彻底删除的时候有用
 
 #### 配置 php.ini
 
-我们在配置里写了 `--with-config-file-path=/opt/php/conf.d` 所以把源码目录下的 `php.ini-development` （也可以拷贝生产环境的） 拷贝到 `/opt/php/cgi/php.ini`
+我们在配置里写了 `--with-config-file-path=/opt/php/cgi` 所以把源码目录下的 `php.ini-development` （也可以拷贝生产环境的） 拷贝到 `/opt/php/cgi/php.ini`
 
 
 #### 配置 PHP 到 Apache
@@ -139,7 +154,10 @@ sudo make install
 sudo a2enmod php7
 ```
 
-重启 Apache 这个时候发现，HTML 解析正常 PHP 却输出了源码，这表示 PHP 并没有被正确的解析。这个时候去 `/etc/apache2/mods-available/` 看发现只有 `php7.load` 没有发现 `php7.conf` （这里是通过对比我的 Ubuntu Desktop 发现的，上面是通过 `apt` 安装的）；当然经过搜索也有人在 Gist 中说了这个问题 [https://gist.github.com/m1st0/1c41b8d0eb42169ce71a](https://gist.github.com/m1st0/1c41b8d0eb42169ce71a)，所以在目录下创建文件 `php7.conf`
+重启 Apache 这个时候发现，HTML 解析正常 PHP 却输出了源码，这表示 PHP 并没有被正确的解析。这个时候去 `/etc/apache2/mods-available/` 
+看发现只有 `php7.load` 没有发现 `php7.conf` （这里是通过对比我的 Ubuntu Desktop 发现的，上面是通过 `apt` 安装的）；
+当然经过搜索也有人在 Gist 中说了这个问题 [https://gist.github.com/m1st0/1c41b8d0eb42169ce71a](https://gist.github.com/m1st0/1c41b8d0eb42169ce71a)，
+所以在目录下创建文件 `php7.conf`
 
 ```bash
 sudo vim /etc/apache2/mods-available/php7.conf
@@ -180,22 +198,34 @@ sudo vim /etc/apache2/mods-available/php7.conf
 这里我们需要 `pthreads` 多线程支持（其实配置和 CGI 几乎可以通用，只要改动一下配置文件的位置参数）
 
 ```bash
+# CLI 需要线程安全，要使用 pthreads，并且不需要 Apache 配置
+
 ./configure --prefix=/opt/php \
---enable-mbstring \
+--enable-calendar \
 --with-curl \
---with-openssl \
---with-xmlrpc \
---enable-zip \
---with-xsl \
---with-ldap \
---with-tidy \
---enable-sockets \
---enable-maintainer-zts \
+--enable-exif \
+--enable-ftp \
+--with-gettext \
+--enable-mbstring \
 --enable-mysqlnd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
+--with-oci8=instantclient,/opt/oracle/instantclient_12_1 \
+--with-pdo-oci=instantclient,/opt/oracle/instantclient_12_1,12.1 \
+--with-openssl \
+--enable-pcntl \
+--with-readline \
+--enable-shmop \
+--enable-sockets \
+--with-tidy \
+--enable-wddx \
+--with-xsl \
+--with-xmlrpc \
+--enable-zip \
+--with-zlib \
 --with-config-file-scan-dir=/opt/php/etc \
 --with-config-file-path=/opt/php/cli \
+--enable-maintainer-zts \
 --disable-cgi
 ```
 
