@@ -17,7 +17,7 @@ tags:
 
 创建用户
 ```sql
-CREATE USER 'slave'@'%' IDENTIFIED WITH mysql_native_password BY 'poms@db';
+CREATE USER 'slave'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
 GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%';
 ```
 
